@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="cn">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/login.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script>
+            (function(){
+                if(!NodeList.prototype.hasOwnProperty('forEach')){
+                    NodeList.prototype.forEach = function(callback){
+                        var item = null
+                        for(var i = 0;i < this.length;i++){
+                            item = this[i]
+                            callback(item)
+                        }
+                    }
+                }
+
+                //封装ajax
+                function _ajax(options){
+                    var opt = {
+                        method: 'get',
+                        data: null,
+                        postData: null,
+                        async: true,
+                        url: window.location.host,
+                        success: null,
+                        fail: null
+                    }
+                    Object.assign(opt, options)
+                    var XMLHttp = null
+                    if(XMLHttpRequest){
+                        XMLHttp = new XMLHttpRequest()
+                    }else{
+                        XMLHttp = new ActiveXObject('Microsoft.XMLHTTP')
+                    }
+                    var params = []
+                    if(!!opt.data){
+                        for(var key in opt.data){
+                            if(opt.data.hasOwnProperty(key)){
+                                params.push(key + '=' + opt.data[key])
+                            }
+                        }
+                        opt.postData = params.join('&')
+                    }
+                    if(opt.method.toUpperCase() === 'POST'){
+                        XMLHttp.open(opt.method, opt.url, opt.async)
+                        XMLHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+                        XMLHttp.send(opt.postData);
+                    }else if(opt.method.toUpperCase() === 'GET'){
+                        XMLHttp.open(opt.method, opt.url + '?' + opt.postData, opt.async)
+                        XMLHttp.send(null)
+                    }else{
+                        return
+                    }
+                    XMLHttp.onreadystatechange = function () {
+                        if (XMLHttp.readyState == 4){
+                            if(XMLHttp.status == 200) {
+                                return !!opt.success?opt.success(XMLHttp.responseText):null
+                            }else{
+                                return !!opt.fail?opt.fail(XMLHttp.status,XMLHttp.statusText):null
+                            }
+                        }
+                    }
+                }
+
+                window.onload = function(){
+                    var userListOpenBtn = document.querySelector('.user-select'),
+                        userList = document.querySelector('.user-list'),
+                        userOptions = userList.querySelectorAll('.option'),
+                        loginBtn = document.querySelector('.login-btn')
+                    userListOpenBtn.addEventListener('mouseenter', userListOpen)
+                    
+                    userOptions.forEach(function(item){
+                        item.addEventListener('click', chooseUser)
+                    })
+                    
+                    loginBtn.addEventListener('click', loginHandle)
+                    
+                    function userListOpen(){
+                        userList.style.opacity = '1'
+                        userList.style.pointerEvents = 'auto'
+                        userList.style.webkitTransform = 'scale(1) translateY(0)'
+                        userList.style.msTransform = 'scale(1) translateY(0)'
+                        userList.style.transform = 'scale(1) translateY(0)'
+                        userList.addEventListener('mouseleave',userListClose)
+                        userListOpenBtn.removeEventListener('mouseenter', userListOpen)
+                        document.querySelector('.wrap').addEventListener('mouseleave', userListClose)
+                    }
+                    function userListClose(){
+                        userList.removeAttribute('style')
+                        userList.removeEventListener('mouseleave', userListClose)
+                        userListOpenBtn.addEventListener('mouseenter',userListOpen)
+                        document.querySelector('.wrap').removeEventListener('mouseleave', userListClose)
+                    }
+                    function chooseUser(){
+                        var current = document.querySelector('.user-current')
+                        current.innerHTML = this.innerHTML
+                        current.dataset.value = this.dataset.value
+                        userListClose()
+                    }
+                    function loginHandle(){
+                        var username = document.querySelector('.user-current').dataset.value
+                        var password = document.querySelector('.password input[type="password"]').value
+                        if(!username || !username.match(/(DRC)|(BLR)|(FB)|(WA)|(EPB)|(Manager)/)){
+                            alert("请选择您的单位")
+                            return
+                        }
+                        if(!password){
+                            alert('请输入您的密码')
+                            return
+                        }
+                        _ajax({
+                            data:{
+                                username: username,
+                                password: password,
+                            },
+                            method: 'post',
+                            url: '/login',
+                            success: function(res){
+                                if(!!res && res.status == '1'){
+                                    alert('ok | ' + res.username)
+                                }else{
+                                    alert('faile')
+                                }
+                            }
+                        })
+                    }
+                }
+            })()
+        </script>
+    </head>
+    <body>
+        <div class="background">
+        </div>
+        <div class="wrap">
+            <div class="username">
+                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <div class="user-select input">
+                    <span class="user-current">选择单位</span>
+                    <ul class="user-list">
+                        <li class="option" data-value="DRC">发改委</li>
+                        <li class="option" data-value="BLR">国土局</li>
+                        <li class="option" data-value="FB">林业局</li>
+                        <li class="option" data-value="WA">水务局</li>
+                        <li class="option" data-value="EPB">环保局</li>
+                        <li class="option" data-value="Manager">网站管理员</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="password">
+                <i class="fa fa-lock icon" aria-hidden="true"></i>
+                <input type="password" name="password" class="input">
+            </div>
+            <!--div>
+                验证码
+            </div-->
+            <div>
+                <span class="login-btn">登陆</span>
+            </div>
+        </div>
+    </body>
+</html>

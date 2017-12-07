@@ -1,0 +1,45 @@
+{
+  "lockfileVersion": 1,
+  "requires": true,
+  "name": "gs",
+  "version": "1.0.0",
+  "description": "government statistics calculator",
+  "main": "index.js",
+  "bin": {
+    "gs": "dev-server.js"
+  },
+  "scripts": {
+    "dev": "node bin/dev-server.js"
+  },
+  "author": "PorYoung",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.6"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "opn": "^5.1.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "sourceMaps": true,
+    "retainLines": true
+  },
+  "engines": {
+    "node": ">= 7.6.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
