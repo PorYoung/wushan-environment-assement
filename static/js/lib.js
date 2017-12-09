@@ -58,7 +58,10 @@ window._ajax = function(options){
         XMLHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
         XMLHttp.send(opt.postData);
     }else if(opt.method.toUpperCase() === 'GET'){
-        XMLHttp.open(opt.method, opt.url + '?' + opt.postData, opt.async)
+        if(!!opt.postData)
+            XMLHttp.open(opt.method, opt.url + '?' + opt.postData, opt.async)
+        else
+            XMLHttp.open(opt.method, opt.url, opt.async)        
         XMLHttp.send(null)
     }else{
         return
@@ -70,7 +73,7 @@ window._ajax = function(options){
                 try{
                     res = JSON.parse(XMLHttp.responseText)
                 }catch(e){
-                    console.log(e)
+                    console.warn(e)
                 }
                 return !!opt.success?opt.success(res):null
             }else{
@@ -92,13 +95,13 @@ if(!NodeList.prototype.hasOwnProperty('forEach')){
 }
 
 //模拟Object.assign
-if(!Object.prototype.hasOwnProperty('assign')){
+if(typeof Object.assign == "undefined"){
     Object.prototype.assign = function(ori, src){
         if(!ori){
-            throw error('Origin Object needed.')
+            console.error('Origin Object cannot be null')
         }
         if(!src){
-            throw error('Src Object cannot be null.')
+            return
         }
         for(key in src){
             if(src.hasOwnProperty(key)){
@@ -157,3 +160,64 @@ function _addLoadEvent(func) {
       }
     }
   }
+function _loadJs(src,options){
+    var opt = {
+        cover: false,
+        removePre: true
+    }
+    Object.assign(opt, options)
+    var scriptTags = document.querySelectorAll('.loadScript')
+    var head = document.getElementsByTagName('head').item(0)
+    for(var i = 0;i < scriptTags.length;i++){
+        if(scriptTags[i].src === src){
+            if(options.cover){
+                scriptTags[i].src = src
+                return
+            }else{
+                return
+            }
+        }
+    }
+    if(opt.removePre){
+        for(var i = 0;i < scriptTags.length;i++){
+            head.removeChild(scriptTags[i])
+        }
+    }
+    script = document.createElement('script')
+    script.src = src
+    script.type = 'text/javascript'
+    script.class = 'loadScript'
+    head.appendChild(script)
+}
+function _loadCss(src,options){
+    var opt = {
+        cover: false,
+        removePre: true
+    }
+    Object.assign(opt, options)
+    var cssTags = document.querySelectorAll('.loadCss')
+    var head = document.getElementsByTagName('head').item(0)
+    for(var i = 0;i < cssTags.length;i++){
+        if(cssTags[i].href === href){
+            if(options.cover){
+                cssTags[i].href = href
+                return
+            }else{
+                return
+            }
+        }
+    }
+    if(opt.removePre){
+        for(var i = 0;i < cssTags.length;i++){
+            head.removeChild(cssTags[i])
+        }
+    }
+    css = document.createElement('link')
+    css.href = src
+    css.rel = 'stylesheet'
+    css.type = 'text/css'
+    css.class = 'loadCss'
+    head.appendChild(css)
+}
+
+_loadJs('/static/js/myLoading.js')

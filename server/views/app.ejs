@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/css/login.css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="/static/js/lib.js"></script>
         <script src="/static/js/router.js"></script>
         <script>
@@ -22,14 +23,48 @@
                         },
                         success: function(res){
                             if(!!res && res == '1'){
-                                alert('登陆成功 | '+req.params.user)
+                                config.user = req.params.user
+                                var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
+                                var clearMyLoading = myLoading("Loading...",html)
+                                window._ajax({
+                                    url: '/'+config.user,
+                                    data:{
+                                        username: config.user
+                                    },
+                                    success: function(data){
+                                        if(!!data && data != '-1'){
+                                            var link = document.getElementsByTagName('link')
+                                            for(var i = 0;i < link.length;i++){
+                                                if(link[i].href.match(/\/login.css$/)){
+                                                    link[i].parentNode.removeChild(link[i])
+                                                    break
+                                                }
+                                            }
+                                            _loadJs('/static/js/app.js')
+                                            _loadCss('/static/css/app.css')
+                                            document.body.innerHTML = data
+                                            setTimeout(function () {
+                                                clearMyLoading()
+                                                qRouter.go('/'+config.user+'/all')
+                                            },1200)
+                                        }else{
+                                            clearMyLoading()
+                                            html = "<i class='fa fa-remove fa-4x fa-fw' style='color: #00EE00'></i><span class='sr-only'>Failed</span>"
+                                            clearMyLoading = myLoading("Failed，请重新登陆",html)
+                                            setTimeout(function () {
+                                                clearMyLoading()
+                                                window.location.href = '/'
+                                            },1200)
+                                        }
+                                    }
+                                })
                             }else{
                                 window.location.href = '/'
                             }
                         }
                 })
             })
-        </script>    
+        </script>
     </head>
     <body>
         <div class="background">

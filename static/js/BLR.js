@@ -1,17 +1,10 @@
-import { error } from "util";
-import { fail } from "assert";
-import { setTimeout } from "timers";
-
 function EvaluationOfLandResources(data){
     var D = parseFloat(data),
         obj = {
             EvaluationOfLandResourcesResult: null
         }
     if(isNaN(D)){
-        var closeTips = showTips()
-        return setTimeout(function(){
-            closeTips()
-        },3000)
+        return false
     }
     if(D > 0){
         obj.EvaluationOfLandResourcesResult = "土地资源压力大"
@@ -21,6 +14,7 @@ function EvaluationOfLandResources(data){
         obj.EvaluationOfLandResourcesResult = "土地资源压力小"
     }
     Object.assign(config.data, obj)
+    return true
 }
 
 function UtilizationEfficiencyOfLandResources(data){
@@ -29,18 +23,16 @@ function UtilizationEfficiencyOfLandResources(data){
         if(data.hasOwnProperty(key)){
             var v = parseFloat(data[key])
             if(isNaN(v)){
-                var closeTips = showTips()
-                return setTimeout(function(){
-                    closeTips()
-                },3000)
+                return false
             }
             D[key] = v
         }
     }
-    var t1 = D.jizhunnian / D.jizhunnianGDP,
-        t2 = D.jizhunnianxingzhengquyuneijiansheyongdimianji / D.pingjianianhoudishinianGDP,
+    var t1 = D.jizhunnianxingzhengquyuneijiansheyongdimianji / D.jizhunnianGDP,
+        t2 = D.pingjianianxingzhengquyuneijiansheyongdimianji / D.pingjianianGDP,
         t3 = t1 / t2,
         t4 = Math.pow(t3, Math.pow((D.pingjianian - D.jizhunnian), -1)),
         res = t4 - 1
     Object.assign(config.data,{UtilizationEfficiencyOfLandResourcesResult: res})
+    return true
 }

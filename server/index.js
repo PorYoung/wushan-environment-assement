@@ -17,7 +17,7 @@ app.set("views", __dirname + "/views")
 
 //cookie、session配置
 app.use(session({
-	secret: 'Song',
+	secret: 'PorYoung',
 	cookie: {
 		maxAge: 60 * 1000 * 30
 	},
