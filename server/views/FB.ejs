@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cn">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/app.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="/static/js/lib.js"></script>
+        <script src="/static/js/router.js"></script>
+        <script src="/static/js/app.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="list all animated">
+                <form class="list-form all form">
+                    <div class="form-group">
+                        <label class="labels" for="zhongduyishangshuituliushimianji-all">中度以上水土流失面积</label>
+                        <input class="form-input" type="number" min="0" name="zhongduyishangshuituliushimianji" id="zhongduyishangshuituliushimianji-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="zhongduyishangtudishahuamianji-all">中度以上土地沙化面积</label>
+                        <input class="form-input" type="number" min="0" name="zhongduyishangtudishahuamianji" id="zhongduyishangtudishahuamianji-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="zhongduyishangyanzihuamianji-all">中度以上盐渍化面积</label>
+                        <input class="form-input" type="number" min="0" name="zhongduyishangyanzihuamianji" id="zhongduyishangyanzihuamianji-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="zhongduyishangshimohuamianji-all">中度以上石漠化面积</label>
+                        <input class="form-input" type="number" min="0" name="zhongduyishangshimohuamianji" id="zhongduyishangshimohuamianji-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="shuituliushizhishu-all">水土流失指数</label>
+                        <input class="form-input" type="number" min="0" name="shuituliushizhishu" id="shuituliushizhishu-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnian-all">基准年</label>
+                        <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianian-all">评价年</label>
+                        <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianingzhengquyuneilincaofugailv-all">基准年行政区域内林草覆盖率</label>
+                        <input class="form-input" type="number" min="0" name="jizhunnianingzhengquyuneilincaofugailv" id="jizhunnianingzhengquyuneilincaofugailv-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneilincaofugailv-all">评价年林草覆盖率</label>
+                        <input class="form-input" type="number" min="0" name="pingjianianxingzhengquyuneilincaofugailv" id="pingjianianxingzhengquyuneilincaofugailv-all">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="quanguonianjunlincaofugailvzengsupingjunshuiping-all">全国年均林草覆盖率变增速平均水平</label>
+                        <input class="form-input" type="number" min="0" name="quanguonianjunlincaofugailvzengsupingjunshuiping" id="quanguonianjunlincaofugailvzengsupingjunshuiping-all">
+                    </div>
+                    <div class="form-submit all">确认</div>
+                </form>
+            </div>
+            <div class="list category animated">
+                <div class="FB-EvaluationOfEcological">
+                    <header><span>生态评价</span></header>
+                    <form class="FB-EvaluationOfEcological-form form">
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangshuituliushimianji-category">中度以上水土流失面积</label>
+                            <input class="form-input" type="number" min="0" name="zhongduyishangshuituliushimianji" id="zhongduyishangshuituliushimianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangtudishahuamianji-category">中度以上土地沙化面积</label>
+                            <input class="form-input" type="number" min="0" name="zhongduyishangtudishahuamianji" id="zhongduyishangtudishahuamianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangyanzihuamianji-category">中度以上盐渍化面积</label>
+                            <input class="form-input" type="number" min="0" name="zhongduyishangyanzihuamianji" id="zhongduyishangyanzihuamianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangshimohuamianji-category">中度以上石漠化面积</label>
+                            <input class="form-input" type="number" min="0" name="zhongduyishangshimohuamianji" id="zhongduyishangshimohuamianji-category">
+                        </div>
+                    </form>
+                </div>
+                <div class="FB-EvaluationOfKeyEcologicalFunctionArea">
+                    <header><span>重点生态功能区评价</span></header>
+                    <form class="FB-EvaluationOfKeyEcologicalFunctionArea-form form">
+                        <div class="form-group">
+                            <label class="labels" for="shuituliushizhishu-category">水土流失指数</label>
+                            <input class="form-input" type="number" min="0" name="shuituliushizhishu" id="shuituliushizhishu-category">
+                        </div>
+                    </form>
+                </div>
+                <div class="FB-EcologicalQuality">
+                    <header><span>林草覆盖率变化</span></header>
+                    <form class="FB-EcologicalQuality-form form">
+                        <div class="form-group">
+                            <label class="labels" for="jizhunnian-category">基准年</label>
+                            <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="pingjianian-category">评价年</label>
+                            <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="jizhunnianingzhengquyuneilincaofugailv-category">基准年行政区域内林草覆盖率</label>
+                            <input class="form-input" type="number" min="0" name="jizhunnianingzhengquyuneilincaofugailv" id="jizhunnianingzhengquyuneilincaofugailv-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="pingjianianxingzhengquyuneilincaofugailv-category">评价年林草覆盖率</label>
+                            <input class="form-input" type="number" min="0" name="pingjianianxingzhengquyuneilincaofugailv" id="pingjianianxingzhengquyuneilincaofugailv-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="quanguonianjunlincaofugailvzengsupingjunshuiping-category">全国年均林草覆盖率变增速平均水平</label>
+                            <input class="form-input" type="number" min="0" name="quanguonianjunlincaofugailvzengsupingjunshuiping" id="quanguonianjunlincaofugailvzengsupingjunshuiping-category">
+                        </div>
+                    </form>
+                </div>
+                <div class="form-submit category">确认</div>
+            </div>
+        </div>
+        <header class="header">
+                <a href="#/all"><div>直接录入</div></a>
+            <i class="fa fa-angle-right fa-2x"></i>
+            <a href="#/category"><div>分类录入</div></a>
+        </header>
+        <div class="tips">
+            <div class="tips-body">
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>Caution</strong>
+                <p class="tips-text"></p>
+            </div>
+        </div>
+    </body>
+</html>
