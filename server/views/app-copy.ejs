@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="cn">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/login.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="/static/js/lib.js"></script>
+        <script src="/static/js/router.js"></script>
+        <script src="/static/js/login.js"></script>
+        <script>
+            const config = {
+                user: "<%= username %>",
+                data:{}
+            }
+            qRouter.init()
+            qRouter.on('/:user',function(req){
+                //验证用户是否存在和登陆
+                window._ajax({
+                        url: '/api/permission',
+                        data: {
+                            username: req.params.user
+                        },
+                        success: function(res){
+                            if(!!res && res == '1'){
+                                config.user = req.params.user
+                                var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
+                                var clearMyLoading = myLoading("Loading...",html)
+                                window._ajax({
+                                    url: '/'+config.user,
+                                    data:{
+                                        username: config.user
+                                    },
+                                    success: function(data){
+                                        if(!!data && data != '-1'){
+                                            var link = document.getElementsByTagName('link')
+                                            for(var i = 0;i < link.length;i++){
+                                                if(link[i].href.match(/\/login.css$/)){
+                                                    link[i].parentNode.removeChild(link[i])
+                                                    break
+                                                }
+                                            }
+                                            if(config.user != 'DRC' && config.user != 'Manager'){
+                                                _loadJs('/static/js/app.js')
+                                            }else{
+                                                _loadCss('/static/css/'+config.user+'.css')
+                                            }
+                                            _loadCss('/static/css/app.css')
+                                            _loadJs('/static/js/'+config.user+'.js',{
+                                                async: true
+                                            })
+                                            document.body.innerHTML = data
+                                            document.querySelector('.header').style.opacity = '0'
+                                            setTimeout(function () {
+                                                clearMyLoading()
+                                                if(config.user != 'DRC' && config.user != 'Manager'){
+                                                    qRouter.go('/'+config.user+'/category')
+                                                }else{
+                                                    qRouter.go('/'+config.user)
+                                                }
+                                                document.querySelector('.header').style.opacity = '1'
+                                            },1200)
+                                        }else{
+                                            clearMyLoading()
+                                            html = "<i class='fa fa-remove fa-4x fa-fw' style='color: #00EE00'></i><span class='sr-only'>Failed</span>"
+                                            clearMyLoading = myLoading("Failed，请重新登陆",html)
+                                            setTimeout(function () {
+                                                clearMyLoading()
+                                                window.location.href = '/'
+                                            },1200)
+                                        }
+                                    }
+                                })
+                            }else{
+                                window.location.href = '/'
+                            }
+                        }
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="tips">
+            <div class="tips-body">
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>Caution</strong>
+                <p class="tips-text"></p>
+            </div>
+        </div>
+        <div class="background">
+        </div>
+        <div class="wrap">
+            <div class="username">
+                <i class="fa fa-user icon" aria-hidden="true"></i>
+                <div class="user-select input">
+                    <span class="user-current">选择单位</span>
+                    <ul class="user-list">
+                        <li class="option" data-value="DRC"><img src="/static/image/DRC.jpg">发改委</li>
+                        <li class="option" data-value="BLR"><img src="/static/image/BLR.jpg">国土局</li>
+                        <li class="option" data-value="FB"><img src="/static/image/FB.jpg">林业局</li>
+                        <li class="option" data-value="WA"><img src="/static/image/WA.jpg">水务局</li>
+                        <li class="option" data-value="EPB"><img src="/static/image/EPB.jpg">环保局</li>
+                        <li class="option" data-value="Manager"><img src="/static/image/Manager.jpg">网站管理员</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="password">
+                <i class="fa fa-lock icon" aria-hidden="true"></i>
+                <input type="password" name="password" class="input">
+            </div>
+            <!--div>
+                验证码
+            </div-->
+            <div>
+                <span class="login-btn">登陆</span>
+            </div>
+        </div>
+    </body>
+</html>

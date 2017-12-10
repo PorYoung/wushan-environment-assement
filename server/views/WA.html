@@ -25,6 +25,18 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="labels" for="jizhunnian-all">基准年</label>
+                <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="pingjianian-all">评价年</label>
+                <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="jizhunnianGDP-all">基准年GDP</label>
+                <input class="form-input" type="number" min="0" name="jizhunnianGDP" id="jizhunnianGDP-all">
+            </div>
+            <div class="form-group">
                 <label class="labels" for="pingjianianGDP-all">评价年GDP</label>
                 <input class="form-input" type="number" min="0" name="pingjianianGDP" id="pingjianianGDP-all">
             </div>
@@ -39,6 +51,14 @@
             <div class="form-group">
                 <label class="labels" for="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-all">全国年均水资源利用效率增速平均水平</label>
                 <input class="form-input" type="number" min="0" name="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping" id="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="dateYear-all">数据年份</label>
+                <input class="form-input" type="number" name="dateYear" id="dateYear-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="dateMonth-all">数据月份</label>
+                <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-all">
             </div>
             <div class="form-submit all">确认</div>
         </form>
@@ -72,6 +92,14 @@
                         <label class="labels" for="dixiashuishifouchaocai-category"></label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfWarterResourcesDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfWarterResourcesDateYear" id="EvaluationOfWarterResourcesDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfWarterResourcesDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfWarterResourcesDateMonth" id="EvaluationOfWarterResourcesDateMonth-category">
+                </div>
             </form>
         </div>
         <div class="WA-UtilizationEfficiencyOfWarterResources">
@@ -79,6 +107,18 @@
                 <span>水资源利用效率变化</span>
             </header>
             <form class="WA-UtilizationEfficiencyOfWarterResources-form form">
+                <div class="form-group">
+                    <label class="labels" for="jizhunnian-category">基准年</label>
+                    <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="pingjianian-category">评价年</label>
+                    <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="jizhunnianGDP-category">基准年GDP</label>
+                    <input class="form-input" type="number" min="0" name="jizhunnianGDP" id="jizhunnianGDP-category">
+                </div>
                 <div class="form-group">
                     <label class="labels" for="pingjianianGDP-category">评价年GDP</label>
                     <input class="form-input" type="number" min="0" name="pingjianianGDP" id="pingjianianGDP-category">
@@ -95,19 +135,41 @@
                     <label class="labels" for="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-category">全国年均水资源利用效率增速平均水平</label>
                     <input class="form-input" type="number" min="0" name="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping" id="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-category">
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="UtilizationEfficiencyOfWarterResourcesDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="UtilizationEfficiencyOfWarterResourcesDateYear" id="UtilizationEfficiencyOfWarterResourcesDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="UtilizationEfficiencyOfWarterResourcesDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="UtilizationEfficiencyOfWarterResourcesDateMonth" id="UtilizationEfficiencyOfWarterResourcesDateMonth-category">
+                </div>
+            </form>
+        </div>
+        <div class="Date">
+            <header><span>数据日期</span></header>
+            <form class="Date-form form">                    
+                <div class="form-group">
+                    <label class="labels" for="dateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="dateYear" id="dateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="dateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-category">
+                </div>
             </form>
         </div>
         <div class="form-submit category">确认</div>
     </div>
 </div>
 <header class="header">
-    <a href="#/all">
+    <a href="#/WA/all">
         <div>直接录入</div>
     </a>
     <i class="fa fa-angle-right fa-2x"></i>
-    <a href="#/category">
+    <a href="#/WA/category">
         <div>分类录入</div>
     </a>
+    <a href="/api/logout" class="logout-btn"><div>离开</div></a>
 </header>
 <div class="tips">
     <div class="tips-body">

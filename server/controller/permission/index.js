@@ -4,8 +4,10 @@ export default class{
         let user = req.params.username
         if(!!req.session.username && req.session.username == username){
             next()
+        }else if(!!req.session.username){
+            next()
         }else{
-            return res.send('-1')
+            return res.redirect('/')
         }
     }
 }

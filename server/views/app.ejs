@@ -9,9 +9,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="/static/js/lib.js"></script>
         <script src="/static/js/router.js"></script>
+        <script src="/static/js/login.js"></script>
         <script>
             const config = {
-                user: null
+                user: "<%= username %>",
+                data:{}
             }
             qRouter.init()
             qRouter.on('/:user',function(req){
@@ -40,12 +42,25 @@
                                                     break
                                                 }
                                             }
-                                            _loadJs('/static/js/app.js')
+                                            if(config.user != 'DRC' && config.user != 'Manager'){
+                                                _loadJs('/static/js/app.js')
+                                            }else{
+                                                _loadCss('/static/css/'+config.user+'.css')
+                                            }
                                             _loadCss('/static/css/app.css')
+                                            _loadJs('/static/js/'+config.user+'.js',{
+                                                async: true
+                                            })
                                             document.body.innerHTML = data
+                                            document.querySelector('.header').style.opacity = '0'
                                             setTimeout(function () {
                                                 clearMyLoading()
-                                                qRouter.go('/'+config.user+'/all')
+                                                if(config.user != 'DRC' && config.user != 'Manager'){
+                                                    qRouter.go('/'+config.user+'/category')
+                                                }else{
+                                                    qRouter.go('/'+config.user)
+                                                }
+                                                document.querySelector('.header').style.opacity = '1'
                                             },1200)
                                         }else{
                                             clearMyLoading()
@@ -67,34 +82,40 @@
         </script>
     </head>
     <body>
+        <div class="tips">
+            <div class="tips-body">
+                <i class="fa fa-exclamation-triangle"></i>
+                <strong>Caution</strong>
+                <p class="tips-text"></p>
+            </div>
+        </div>
+        <div class="title">
+            巫山县资源环境承载能力监测预警评价软件系统
+        </div>
         <div class="background">
         </div>
-        <div class="wrap">
-            <div class="username">
-                <i class="fa fa-user icon" aria-hidden="true"></i>
-                <div class="user-select input">
-                    <span class="user-current">选择单位</span>
-                    <ul class="user-list">
-                        <li class="option" data-value="DRC">发改委</li>
-                        <li class="option" data-value="BLR">国土局</li>
-                        <li class="option" data-value="FB">林业局</li>
-                        <li class="option" data-value="WA">水务局</li>
-                        <li class="option" data-value="EPB">环保局</li>
-                        <li class="option" data-value="Manager">网站管理员</li>
-                    </ul>
-                </div>
+        <div class="wrap flex">
+            <div class="username flex">
+                <header><i class="fa fa-user icon animated pulse infinite" aria-hidden="true"></i><span>选择单位</span></header>
+                <ul class="user-list flex">
+                    <li class="option" data-value="DRC"><span><img src="/static/image/DRC.jpg"></span>发改委</li>
+                    <li class="option" data-value="BLR"><span><img src="/static/image/BLR.png"></span>国土局</li>
+                    <li class="option" data-value="FB"><span><img src="/static/image/FB.png"></span>林业局</li>
+                    <li class="option" data-value="WA"><span><img src="/static/image/WA.png"></span>水务局</li>
+                    <li class="option" data-value="EPB"><span><img src="/static/image/EPB.png"></span>环保局</li>
+                    <li class="option" data-value="Manager"><span><img src="/static/image/Manager.png"></span>网站管理员</li>
+                </ul>
             </div>
-            <div class="password">
-                <i class="fa fa-lock icon" aria-hidden="true"></i>
+            <div class="password flex">
+                <i class="fa fa-lock icon animated tada infinite" aria-hidden="true"></i>
                 <input type="password" name="password" class="input">
             </div>
             <!--div>
                 验证码
             </div-->
-            <div>
+            <div class="animated pulse infinite">
                 <span class="login-btn">登陆</span>
             </div>
         </div>
-        <script src="/static/js/login.js"></script>
     </body>
 </html>

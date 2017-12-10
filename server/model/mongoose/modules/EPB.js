@@ -1,6 +1,8 @@
 import mongoose from '../config'
 
 const EPBSchema = new mongoose.Schema({
+    submitDate: Date,
+    statisticsDate: String,
     EvaluationOfEnvironment: Object,
     EvaluationOfUrbanizationArea: Object,
     EmissionIntensityOfPollutants: Object

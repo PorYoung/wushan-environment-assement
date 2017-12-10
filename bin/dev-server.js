@@ -13,6 +13,6 @@ const app = require('../server')
 /**************服务端配置结束****************/
 app.use('/static', express.static('./static'))
 
-const uri = 'http://localhost:' + 8878
+const uri = 'http://localhost:' + 3000
 
 opn(uri)

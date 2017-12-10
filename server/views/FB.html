@@ -45,6 +45,14 @@
                 <label class="labels" for="quanguonianjunlincaofugailvzengsupingjunshuiping-all">全国年均林草覆盖率变增速平均水平</label>
                 <input class="form-input" type="number" min="0" name="quanguonianjunlincaofugailvzengsupingjunshuiping" id="quanguonianjunlincaofugailvzengsupingjunshuiping-all">
             </div>
+            <div class="form-group">
+                <label class="labels" for="dateYear-all">数据年份</label>
+                <input class="form-input" type="number" name="dateYear" id="dateYear-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="dateMonth-all">数据月份</label>
+                <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-all">
+            </div>
             <div class="form-submit all">确认</div>
         </form>
     </div>
@@ -74,6 +82,14 @@
                     <label class="labels" for="pingjiaquyutudimianji-category">评价区域土地面积</label>
                     <input class="form-input" type="number" min="0" name="pingjiaquyutudimianji" id="pingjiaquyutudimianji-category">
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfEcologicalDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfEcologicalDateYear" id="EvaluationOfEcologicalDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfEcologicalDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfEcologicalDateMonth" id="EvaluationOfEcologicalDateMonth-category">
+                </div>
             </form>
         </div>
         <div class="FB-EvaluationOfKeyEcologicalFunctionArea">
@@ -84,6 +100,14 @@
                 <div class="form-group">
                     <label class="labels" for="shuituliushizhishu-category">水土流失指数</label>
                     <input class="form-input" type="number" min="0" name="shuituliushizhishu" id="shuituliushizhishu-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfKeyEcologicalFunctionAreaDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfKeyEcologicalFunctionAreaDateYear" id="EvaluationOfKeyEcologicalFunctionAreaDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfKeyEcologicalFunctionAreaDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfKeyEcologicalFunctionAreaDateMonth" id="EvaluationOfKeyEcologicalFunctionAreaDateMonth-category">
                 </div>
             </form>
         </div>
@@ -112,19 +136,41 @@
                     <label class="labels" for="quanguonianjunlincaofugailvzengsupingjunshuiping-category">全国年均林草覆盖率变增速平均水平</label>
                     <input class="form-input" type="number" min="0" name="quanguonianjunlincaofugailvzengsupingjunshuiping" id="quanguonianjunlincaofugailvzengsupingjunshuiping-category">
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="EcologicalQualityDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EcologicalQualityDateYear" id="EcologicalQualityDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EcologicalQualityDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EcologicalQualityDateMonth" id="EcologicalQualityDateMonth-category">
+                </div>
+            </form>
+        </div>
+        <div class="Date">
+            <header><span>数据日期</span></header>
+            <form class="Date-form form">                    
+                <div class="form-group">
+                    <label class="labels" for="dateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="dateYear" id="dateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="dateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-category">
+                </div>
             </form>
         </div>
         <div class="form-submit category">确认</div>
     </div>
 </div>
 <header class="header">
-    <a href="#/all">
+    <a href="#/FB/all">
         <div>直接录入</div>
     </a>
     <i class="fa fa-angle-right fa-2x"></i>
-    <a href="#/category">
+    <a href="#/FB/category">
         <div>分类录入</div>
     </a>
+    <a href="/api/logout" class="logout-btn"><div>离开</div></a>
 </header>
 <div class="tips">
     <div class="tips-body">

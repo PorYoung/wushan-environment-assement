@@ -37,7 +37,7 @@
         var tagElements = form.getElementsByTagName('input');
         for (var j = 0; j < tagElements.length; j++) {
             if (tagElements[j].type == "number" || tagElements[j].type == "text") {
-                if (tagElements[j].value == '') {
+                if (tagElements[j].value == '' && !tagElements[j].name.match(/(DateMonth)|(DateYear)/)) {
                     formCategory.removeEventListener('click', bindSubmitCategoryEvent)
                     formAll.removeEventListener('click', bindSubmitAllEvent)
                     var closeTips = showTips()
@@ -70,23 +70,9 @@
             }
         })
         Object.assign(config.data, obj)
+        qRouter.go('/'+config.user+'/submit')
     }
 })()
-function showTips(str) {
-    document.querySelector('.tips-text').innerHTML = str || '请检查您的输入'
-    document.querySelector('.tips').style.zIndex = '999'
-    document.querySelector('.tips').classList.addClass('animated flipInX')
-    document.body.classList.addClass('animated shake')
-    return function () {
-        document.body.classList.removeClass('animated shake')
-        document.querySelector('.tips').classList.removeClass('animated flipInX')
-        document.querySelector('.tips').classList.addClass('animated flipOutY')
-        setTimeout(function () {
-            document.querySelector('.tips').style.zIndex = '-1'
-            document.querySelector('.tips').classList.removeClass('animated flipOutY')
-        }, 1000)
-    }
-}
 
 qRouter.on('/' + config.user + '/all', function (req) {
     var listAll = document.querySelector('.list.all'),

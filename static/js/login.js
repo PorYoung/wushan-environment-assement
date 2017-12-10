@@ -1,48 +1,104 @@
 (function(){
     window.onload = function(){
-        var userListOpenBtn = document.querySelector('.user-select'),
-            userList = document.querySelector('.user-list'),
-            userOptions = userList.querySelectorAll('.option'),
+        if(!!config.user){
+            document.body.style.opacity = '0'
+            window._ajax({
+                url: '/api/permission',
+                data: {
+                    username: config.user
+                },
+                success: function(res){
+                    if(!!res && res == '1'){
+                        config.user = config.user
+                        var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
+                        var clearMyLoading = myLoading("Loading...",html)
+                        window._ajax({
+                            url: '/'+config.user,
+                            data:{
+                                username: config.user
+                            },
+                            success: function(data){
+                                if(!!data && data != '-1'){
+                                    var link = document.getElementsByTagName('link')
+                                    for(var i = 0;i < link.length;i++){
+                                        if(link[i].href.match(/\/login.css$/)){
+                                            link[i].parentNode.removeChild(link[i])
+                                            break
+                                        }
+                                    }
+                                    if(config.user != 'DRC' && config.user != 'Manager'){
+                                        _loadJs('/static/js/app.js')
+                                    }else{
+                                        _loadCss('/static/css/DRC.css')
+                                    }
+                                    _loadCss('/static/css/app.css')
+                                    _loadJs('/static/js/'+config.user+'.js',{
+                                        async: true
+                                    })
+                                    document.body.innerHTML = data
+                                    setTimeout(function () {
+                                        clearMyLoading()
+                                        var cur = window.location.href
+                                        if(cur.match(/\/submit/)){
+                                            if(config.user != 'DRC' && config.user != 'Manager'){
+                                                qRouter.go('/'+config.user+'/category')
+                                            }else{
+                                                qRouter.go('/'+config.user)
+                                            }
+                                            qRouter.refresh()
+                                        }else
+                                            qRouter.refresh()
+                                        document.body.style.opacity = '1'
+                                    },1200)
+                                }else{
+                                    clearMyLoading()
+                                    html = "<i class='fa fa-remove fa-4x fa-fw' style='color: #00EE00'></i><span class='sr-only'>Failed</span>"
+                                    clearMyLoading = myLoading("Failed，请重新登陆",html)
+                                    setTimeout(function () {
+                                        clearMyLoading()
+                                        window.location.href = '/'
+                                        document.body.style.opacity = '1'
+                                    },1200)
+                                }
+                            }
+                        })
+                    }else{
+                        window.location.href = '/'
+                        document.body.style.opacity = '1'
+                    }
+                }
+            })
+        }
+        var userlist = document.querySelectorAll('.user-list .option'),
             loginBtn = document.querySelector('.login-btn')
-        userListOpenBtn.addEventListener('mouseenter', userListOpen)
-        
-        userOptions.forEach(function(item){
-            item.addEventListener('click', chooseUser)
+        userlist.forEach(function(item){
+            item.addEventListener('click',chooseUser)
         })
-        
         loginBtn.addEventListener('click', loginHandle)
         
-        function userListOpen(){
-            userList.style.opacity = '1'
-            userList.style.pointerEvents = 'auto'
-            userList.style.webkitTransform = 'scale(1) translateY(0)'
-            userList.style.msTransform = 'scale(1) translateY(0)'
-            userList.style.transform = 'scale(1) translateY(0)'
-            userList.addEventListener('mouseleave',userListClose)
-            userListOpenBtn.removeEventListener('mouseenter', userListOpen)
-            document.querySelector('.wrap').addEventListener('mouseleave', userListClose)
-        }
-        function userListClose(){
-            userList.removeAttribute('style')
-            userList.removeEventListener('mouseleave', userListClose)
-            userListOpenBtn.addEventListener('mouseenter',userListOpen)
-            document.querySelector('.wrap').removeEventListener('mouseleave', userListClose)
-        }
         function chooseUser(){
-            var current = document.querySelector('.user-current')
-            current.innerHTML = this.innerHTML
-            current.dataset.value = this.dataset.value
-            userListClose()
+            var value = this.dataset.value
+            var preActive = document.querySelector('.user-active')
+            !!preActive && preActive.classList.remove('user-active')
+            this.classList.add('user-active')
+            var username = document.querySelector('.username')
+            username.dataset.value = value
         }
         function loginHandle(){
-            var username = document.querySelector('.user-current').dataset.value
+            var username = document.querySelector('.username').dataset.value
             var password = document.querySelector('.password input[type="password"]').value
             if(!username || !username.match(/(DRC)|(BLR)|(FB)|(WA)|(EPB)|(Manager)/)){
-                alert("请选择您的单位")
+                var closeTips = showTips('请选择您的单位')
+                setTimeout(function(){
+                    closeTips()
+                },3000)
                 return
             }
             if(!password){
-                alert('请输入您的密码')
+                var closeTips = showTips('请输入您的密码')
+                setTimeout(function(){
+                    closeTips()
+                },3000)
                 return
             }
             window._ajax({
@@ -56,10 +112,16 @@
                     if(!!res && res.status == '1'){
                         qRouter.go('/'+res.username)
                     }else{
-                        alert('faile')
+                        var closeTips = showTips('密码有误')
+                        setTimeout(function(){
+                            closeTips()
+                        },3000)
                     }
                 }
             })
         }
+    }
+    window.onbeforeunload = function(event){
+        event.returnValue = '信息尚未提交，您确定要离开吗'
     }
 })()

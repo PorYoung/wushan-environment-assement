@@ -1,5 +1,6 @@
 import express from 'express'
 import session from 'express-session'
+import bodyParser from 'body-parser'
 import http from 'http'
 import db from './model/mongoose'
 import router from './router'
@@ -9,7 +10,7 @@ global.db = db
 
 const app = express()
 const server = http.createServer(app)
-server.listen(8878)
+server.listen(3000)
 
 //指定模板引擎和模板位置
 app.set("view engine", "ejs")
@@ -24,6 +25,11 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true,
 }))
+
+app.use(bodyParser.urlencoded({
+	extended: true
+}))
+app.use(bodyParser.json())
 
 app.use(router)
 

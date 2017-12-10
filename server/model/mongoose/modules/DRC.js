@@ -1,6 +1,8 @@
 import mongoose from '../config'
 
 const DRCSchema = new mongoose.Schema({
+    submitDate: Date,
+    statisticsDate: String,
     EvaluationOfLandResources: Object,
     EvaluationOfUrbanizationArea: Object,
     UtilizationEfficiencyOfLandResources: Object,

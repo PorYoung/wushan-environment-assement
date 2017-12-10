@@ -2,8 +2,7 @@ import mongoose from '../config'
 
 const userSchema = new mongoose.Schema({
     username: String,
-    password: String,
-    manager: Boolean
+    password: String
 })
 
 const user = mongoose.model('user', userSchema)

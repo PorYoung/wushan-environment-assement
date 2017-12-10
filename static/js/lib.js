@@ -35,7 +35,8 @@ window._ajax = function(options){
         async: true,
         url: window.location.host,
         success: null,
-        fail: null
+        fail: null,
+        dataType: null
     }
     Object.assign(opt, options)
     var XMLHttp = null
@@ -44,20 +45,35 @@ window._ajax = function(options){
     }else{
         XMLHttp = new ActiveXObject('Microsoft.XMLHTTP')
     }
-    var params = []
-    if(!!opt.data){
-        for(var key in opt.data){
-            if(opt.data.hasOwnProperty(key)){
-                params.push(key + '=' + opt.data[key])
-            }
-        }
-        opt.postData = params.join('&')
-    }
     if(opt.method.toUpperCase() === 'POST'){
         XMLHttp.open(opt.method, opt.url, opt.async)
-        XMLHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
-        XMLHttp.send(opt.postData);
+        if(!!opt.dataType && opt.dataType.toUpperCase() == "JSON"){
+            opt.postData = JSON.stringify(opt.data)
+            XMLHttp.setRequestHeader('Content-Type', 'application/json');
+            XMLHttp.send(opt.postData);
+        }else{
+            var params = []
+            if(!!opt.data){
+                for(var key in opt.data){
+                    if(opt.data.hasOwnProperty(key)){
+                        params.push(key + '=' + opt.data[key])
+                    }
+                }
+                opt.postData = params.join('&')
+            }
+            XMLHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+            XMLHttp.send(opt.postData);
+        }
     }else if(opt.method.toUpperCase() === 'GET'){
+        var params = []
+        if(!!opt.data){
+            for(var key in opt.data){
+                if(opt.data.hasOwnProperty(key)){
+                    params.push(key + '=' + opt.data[key])
+                }
+            }
+            opt.postData = params.join('&')
+        }
         if(!!opt.postData)
             XMLHttp.open(opt.method, opt.url + '?' + opt.postData, opt.async)
         else
@@ -159,21 +175,36 @@ function _addLoadEvent(func) {
         func();
       }
     }
-  }
+}
+
+function showTips(str) {
+    document.querySelector('.tips-text').innerHTML = str || '请检查您的输入'
+    document.querySelector('.tips').style.zIndex = '999'
+    document.querySelector('.tips').classList.addClass('animated flipInX')
+    document.body.classList.addClass('animated shake')
+    return function () {
+        document.body.classList.removeClass('animated shake')
+        document.querySelector('.tips').classList.removeClass('animated flipInX')
+        document.querySelector('.tips').classList.addClass('animated flipOutY')
+        setTimeout(function () {
+            document.querySelector('.tips').style.zIndex = '-1'
+            document.querySelector('.tips').classList.removeClass('animated flipOutY')
+        }, 1000)
+    }
+}
 function _loadJs(src,options){
     var opt = {
         cover: false,
-        removePre: true
+        removePre: true,
+        async: false,
+        defer: false
     }
     Object.assign(opt, options)
-    var scriptTags = document.querySelectorAll('.loadScript')
+    var scriptTags = document.querySelectorAll('.loadJs')
     var head = document.getElementsByTagName('head').item(0)
     for(var i = 0;i < scriptTags.length;i++){
         if(scriptTags[i].src === src){
             if(options.cover){
-                scriptTags[i].src = src
-                return
-            }else{
                 return
             }
         }
@@ -186,10 +217,16 @@ function _loadJs(src,options){
     script = document.createElement('script')
     script.src = src
     script.type = 'text/javascript'
-    script.class = 'loadScript'
+    script.setAttribute('class','loadJs')
+    if(opt.async){
+        script.async = 'async'
+    }
+    if(opt.defer){
+        script.defer = 'defer'
+    }
     head.appendChild(script)
 }
-function _loadCss(src,options){
+function _loadCss(href,options){
     var opt = {
         cover: false,
         removePre: true
@@ -200,9 +237,6 @@ function _loadCss(src,options){
     for(var i = 0;i < cssTags.length;i++){
         if(cssTags[i].href === href){
             if(options.cover){
-                cssTags[i].href = href
-                return
-            }else{
                 return
             }
         }
@@ -213,10 +247,9 @@ function _loadCss(src,options){
         }
     }
     css = document.createElement('link')
-    css.href = src
+    css.href = href
     css.rel = 'stylesheet'
     css.type = 'text/css'
-    css.class = 'loadCss'
     head.appendChild(css)
 }
 

@@ -95,8 +95,14 @@ function myLoading(titleString,textString,container) {
         wrapDiv.style.transition = "opacity 1s";
         wrapDiv.style.opacity = "0";
         setTimeout(function () {
-            wrapDiv.style.display = "none";
-            wrapDiv.parentNode.removeChild(wrapDiv);
+            if(!!wrapDiv){
+                wrapDiv.style.display = "none";
+                wrapDiv.parentNode.removeChild(wrapDiv);
+            }else{
+                var wrapDiv = document.getElementById('myLoadingWrap');
+                wrapDiv.style.display = "none";
+                wrapDiv.parentNode.removeChild(wrapDiv);
+            }
             document.body.style.filter = "";
         },1200);
     }

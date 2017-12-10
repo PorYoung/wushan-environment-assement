@@ -21,14 +21,7 @@ function EvaluationOfEnvironmentAir(data){
             }
         }
     }
-    if(config.data.hasOwnProperty('EvaluationOfEnvironment')){
-        Object.assign(config.data.EvaluationOfEnvironment, {EvaluationOfEnvironmentAir: RMax})
-    }else{
-        config.data.EvaluationOfEnvironment = {
-            EvaluationOfEnvironmentAir: RMax
-        }
-    }
-    return true
+    return RMax
 }
 function EvaluationOfEnvironmentWater(data){
     var D = {},
@@ -54,41 +47,42 @@ function EvaluationOfEnvironmentWater(data){
         RlMax = null
     for(key in data){
         if(data.hasOwnProperty(key)){
-            var v = parseFloat(data[key])
-            if(isNaN(v)){
-                return false
-            }
-            D[key] = v
-            if(key == "dov"){
-                var tmpr = 1 / (D[key] / Sr[key]) - 1,
-                    tmpl = 1 / (D[key] / Sl[key]) - 1
-                if(RrMax == null || tmpr > RrMax){
-                    RrMax = tmpr
+            if(key != "shuihuanjingzhiliangjianceduanmian"){
+                var v = parseFloat(data[key])
+                if(isNaN(v)){
+                    return false
                 }
-                if(RlMax == null || tmpl > RlMax){
-                    RlMax = tmpl
+                D[key] = v
+                if(key == "dov"){
+                    var tmpr = 1 / (D[key] / Sr[key]) - 1,
+                        tmpl = 1 / (D[key] / Sl[key]) - 1
+                    if(RrMax == null || tmpr > RrMax){
+                        RrMax = tmpr
+                    }
+                    if(RlMax == null || tmpl > RlMax){
+                        RlMax = tmpl
+                    }
+                }else{
+                    var tmpr = D[key] / Sr[key] - 1,
+                        tmpl = D[key] / Sl[key] - 1
+                    if(RrMax == null || tmpr > RrMax){
+                        RrMax = tmpr
+                    }
+                    if(RlMax == null || tmpl > RlMax){
+                        RlMax = tmpl
+                    }
                 }
             }else{
-                var tmpr = D[key] / Sr[key] - 1,
-                    tmpl = D[key] / Sl[key] - 1
-                if(RrMax == null || tmpr > RrMax){
-                    RrMax = tmpr
-                }
-                if(RlMax == null || tmpl > RlMax){
-                    RlMax = tmpl
-                }
+                D[key] = data[key]
             }
         }
     }
-    var RMax = (RrMax + RlMax) / 2     //水污染物浓度超标指数
-    if(config.data.hasOwnProperty('EvaluationOfEnvironment')){
-        Object.assign(config.data.EvaluationOfEnvironment, {EvaluationOfEnvironmentWarter: RMax})
+    //水污染物浓度超标指数 分河流断面和湖库断面
+    if(!D.shuihuanjingzhiliangjianceduanmian){
+        return RrMax
     }else{
-        config.data.EvaluationOfEnvironment = {
-            EvaluationOfEnvironmentWater: RMax
-        }
+        return RlMax
     }
-    return true
 }
 function EvaluationOfEnvironment(){
     if(!config.data.hasOwnProperty('EvaluationOfEnvironment') || !config.data.EvaluationOfEnvironment.hasOwnProperty('EvaluationOfEnvironmentWater') || !config.data.EvaluationOfEnvironment.hasOwnProperty('EvaluationOfEnvironmentAir')){
@@ -96,16 +90,17 @@ function EvaluationOfEnvironment(){
     }else{
         var a = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir,
             w = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWarter,
-            R = a > w?a:w
+            R = a > w?a:w,
+            res = null
         if(R > 0){
-            Object.assign(config.data.EvaluationOfEnvironment, {EvaluationOfEnvironment: '污染物浓度超标'})
+            res = '污染物浓度超标'
         }else if(R > -0.2){
-            Object.assign(config.data.EvaluationOfEnvironment, {EvaluationOfEnvironment: '污染物浓度接近超标'})
+            res = '污染物浓度接近超标'
         }else{
-            Object.assign(config.data.EvaluationOfEnvironment, {EvaluationOfEnvironment: '污染物浓度未超标'})
+            res = '污染物浓度未超标'
         }
     }
-    return true
+    return res
 }
 
 function EvaluationOfUrbanizationAreaWater(data){
@@ -173,14 +168,7 @@ function EvaluationOfUrbanizationAreaWater(data){
             }
         }
     }
-    if(config.data.hasOwnProperty('EvaluationOfUrbanizationArea')){
-        Object.assign(config.data.EvaluationOfUrbanizationArea, {EvaluationOfUrbanizationAreaWater: eva})
-    }else{
-        config.data.EvaluationOfUrbanizationArea = {
-            EvaluationOfUrbanizationAreaWater: eva
-        }
-    }
-    return true
+    return eva
 }
 
 function EvaluationOfUrbanizationAreaAir(data){
@@ -248,14 +236,7 @@ function EvaluationOfUrbanizationAreaAir(data){
             }
         }
     }
-
-    if(config.data.hasOwnProperty('EvaluationOfUrbanizationArea')){
-        Object.assign(config.data.EvaluationOfUrbanizationArea, {EvaluationOfUrbanizationAreaAir: eva})
-    }else{
-        config.data.EvaluationOfUrbanizationArea = {
-            EvaluationOfUrbanizationAreaAir: eva
-        }
-    }
+    return eva
 }
 
 function  EvaluationOfUrbanizationArea(){
@@ -263,16 +244,17 @@ function  EvaluationOfUrbanizationArea(){
         return false
     }else{
         var a = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaAir,
-            b = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater
+            b = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater,
+            res = null
         if(a === '严重污染' || (a === '重度污染' && b === '重度污染')){
-            Object.assign(config.data.EvaluationOfUrbanizationArea, {EvaluationOfUrbanizationArea: '水气环境黑灰指数超载'})
+            res =  '水气环境黑灰指数超载'
         }else if(b === '重度污染' || a === '重度污染' || (a === '中度污染' && b === '中度污染')){
-            Object.assign(config.data.EvaluationOfUrbanizationArea, {EvaluationOfUrbanizationArea: '水气环境黑灰指数临界超载'})
+            res =  '水气环境黑灰指数临界超载'
         }else{
-            Object.assign(config.data.EvaluationOfUrbanizationArea, {EvaluationOfUrbanizationArea: '水气环境黑灰指数未超载'})            
-        }
+            res = '水气环境黑灰指数未超载'
+        }        
     }
-    return true
+    return res
 }
 
 function EmissionIntensityOfPollutantsWaterO(data){
@@ -291,14 +273,7 @@ function EmissionIntensityOfPollutantsWaterO(data){
         t3 = t1 / t2,
         t4 = Math.pow(t3, Math.pow((D.pingjianian - D.jizhunnian), -1)),
         res = t4 - 1
-        if(config.data.hasOwnProperty('EmissionIntensityOfPollutants')){
-            Object.assign(config.data.EmissionIntensityOfPollutants, {EmissionIntensityOfPollutantsWaterO: res})
-        }else{
-            config.data.EmissionIntensityOfPollutants = {
-                EmissionIntensityOfPollutantsWaterO: res
-            }
-        }
-        return true
+        return res
 }
 
 function EmissionIntensityOfPollutantsWaterN(data){
@@ -317,14 +292,7 @@ function EmissionIntensityOfPollutantsWaterN(data){
         t3 = t1 / t2,
         t4 = Math.pow(t3, Math.pow((D.pingjianian - D.jizhunnian), -1)),
         res = t4 - 1
-        if(config.data.hasOwnProperty('EmissionIntensityOfPollutants')){
-            Object.assign(config.data.EmissionIntensityOfPollutants, {EmissionIntensityOfPollutantsWaterN: res})
-        }else{
-            config.data.EmissionIntensityOfPollutants = {
-                EmissionIntensityOfPollutantsWaterN: res
-            }
-        }
-        return true
+        return res
 }
 
 function EmissionIntensityOfPollutantsAirSO2(data){
@@ -343,14 +311,7 @@ function EmissionIntensityOfPollutantsAirSO2(data){
         t3 = t1 / t2,
         t4 = Math.pow(t3, Math.pow((D.pingjianian - D.jizhunnian), -1)),
         res = t4 - 1
-        if(config.data.hasOwnProperty('EmissionIntensityOfPollutants')){
-            Object.assign(config.data.EmissionIntensityOfPollutants, {EmissionIntensityOfPollutantsAirSO2: res})
-        }else{
-            config.data.EmissionIntensityOfPollutants = {
-                EmissionIntensityOfPollutantsAirSO2: res
-            }
-        }
-        return true
+        return res
 }
 function EmissionIntensityOfPollutantsAirNO(data){
     var D = {}
@@ -368,12 +329,316 @@ function EmissionIntensityOfPollutantsAirNO(data){
         t3 = t1 / t2,
         t4 = Math.pow(t3, Math.pow((D.pingjianian - D.jizhunnian), -1)),
         res = t4 - 1
-        if(config.data.hasOwnProperty('EmissionIntensityOfPollutants')){
-            Object.assign(config.data.EmissionIntensityOfPollutants, {EmissionIntensityOfPollutantsAirNO: res})
-        }else{
-            config.data.EmissionIntensityOfPollutants = {
-                EmissionIntensityOfPollutantsAirNO: res
+        return res
+}
+
+qRouter.on('/'+config.user+'/submit',function(){
+    if(!!config.data){
+        var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
+        var clearMyLoading = myLoading("Waiting...",html)
+        //默认所有评测日期为录入日期
+        for(key in config.data){
+            if(key.match(/DateYear/)){
+                if(!config.data[key]){
+                    config.data[key] = config.data.dateYear
+                }
+            }else if(key.match(/DateMonth/)){
+                if(!config.data[key]){
+                    config.data[key] = config.data.dateMonth
+                }
             }
         }
-        return true
-}
+        //环境评价
+        //空气质量检测
+        var t = {}
+        for(key in config.data){
+            switch(key){
+                case 'so2v':
+                case 'no2v':
+                case 'pm10v':
+                case 'cov':
+                case 'o3v':
+                case 'pm2d5v':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EvaluationOfEnvironmentAirResult = EvaluationOfEnvironmentAir(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        if(config.data.hasOwnProperty('EvaluationOfEnvironment')){
+            config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir = {}
+        }else{
+            config.data.EvaluationOfEnvironment = {}
+            config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir = {}
+        }
+        Object.assign(config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir, t)
+        //水质检测
+        t = {}
+        for(key in config.data){
+            switch(key){
+                case 'dov':
+                case 'codmnv':
+                case 'bod5v':
+                case 'codcrv':
+                case 'nh3nv':
+                case 'tnv':
+                case 'tpv':
+                case 'shuihuanjingzhiliangjianceduanmian':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EvaluationOfEnvironmentWaterResult = EvaluationOfEnvironmentWater(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWater = {}
+        Object.assign(config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWater, t)
+        t = {}
+        if((t.EvaluationOfEnvironmentResult = EvaluationOfEnvironment()) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        t.EvaluationOfEnvironmentDateYear = config.data.EvaluationOfEnvironmentDateYear
+        t.EvaluationOfEnvironmentDateMonth = config.data.EvaluationOfEnvironmentDateMonth
+        Object.assign(config.data.EvaluationOfEnvironment, t)
+
+        //城市水环境
+        t={}
+        for(key in config.data){
+            switch(key){
+                case 'chengshiyujianzhizhenzongmianji':
+                case 'chengshishuihuanjingpingjiaquyuquyu':
+                case 'heichoushuitishicechangdu':
+                case 'zhongduheichoushuitichangdu':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EvaluationOfUrbanizationAreaWaterResult = EvaluationOfUrbanizationAreaWater(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        if(config.data.hasOwnProperty('EvaluationOfUrbanizationArea')){
+            config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater = {}
+        }else{
+            config.data.EvaluationOfUrbanizationArea = {}
+            config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater = {}
+        }
+        Object.assign(config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater, t)
+        //城市空气质量环境
+        t={}
+        for(key in config.data){
+            switch(key){
+                case 'hexinchengshizhuchengqu':
+                case 'pm2d5nianchaobiaotianshu':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EvaluationOfUrbanizationAreaAirResult = EvaluationOfUrbanizationAreaAir(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaAir = {}
+        Object.assign(config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaAir, t)
+        //城市化地区评价
+        t = {}
+        if((t.EvaluationOfUrbanizationAreaResult = EvaluationOfUrbanizationArea(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        t.EvaluationOfUrbanizationAreaDateYear = config.data.EvaluationOfUrbanizationAreaDateYear
+        t.EvaluationOfUrbanizationAreaDateMonth = config.data.EvaluationOfUrbanizationAreaDateMonth
+        Object.assign(config.data.EvaluationOfUrbanizationArea, t)
+
+        //水污染物 化学需氧量
+        t = {}
+        for(key in config.data){
+            switch(key){
+                case 'EmissionIntensityOfPollutants':
+                case 'jizhunnian':
+                case 'pingjianian':
+                case 'jizhunnianGDP':
+                case 'pingjianianGDP':
+                case 'jizhunnianxingzhengquyuneihuaxuexuyangliang':
+                case 'pingjianianxingzhengquyuneihuaxuexuyangliang':
+                case 'quanguonianjunhuaxuexuyangliangpaifangqiangduzengsushuiping':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EmissionIntensityOfPollutantsWaterOResult = EmissionIntensityOfPollutantsWaterO(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        if(config.data.hasOwnProperty('EmissionIntensityOfPollutants')){
+            config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsWaterO = {}
+        }else{
+            config.data.EmissionIntensityOfPollutants = {}
+            config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsWaterO = {}
+        }
+        Object.assign(config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsWaterO, t)
+        //水污染物 氨氮
+        t = {}
+        for(key in config.data){
+            switch(key){
+                case 'jizhunnian':
+                case 'pingjianian':
+                case 'jizhunnianGDP':
+                case 'pingjianianGDP':
+                case 'jizhunnianxingzhengquneiandanpaifangliang':
+                case 'pingjianianxingzhengquyuneiandanpaifangliang':
+                case 'quanguonianjunandanpaifangqiangduzengsupingjunshuiping':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EmissionIntensityOfPollutantsWaterNResult = EmissionIntensityOfPollutantsWaterN(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsWaterN = {}
+        Object.assign(config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsWaterN, t)
+        //大气污染物 二氧化硫
+        t = {}
+        for(key in config.data){
+            switch(key){
+                case 'jizhunnian':
+                case 'pingjianian':
+                case 'jizhunnianGDP':
+                case 'pingjianianGDP':
+                case 'jizhunnianxingzhengquyuneieryanghualiupaifangliang':
+                case 'pingjianianxingzhengquyuneieryanghualiupaifangliang':
+                case 'quanguonianjuneryanghualiupaifangqiangduzengsupingjunshuiping':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EmissionIntensityOfPollutantsAirSO2Result = EmissionIntensityOfPollutantsAirSO2(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsAirSO2 = {}
+        Object.assign(config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsAirSO2, t)
+        //大气污染物 氮氧化物
+        t = {}
+        for(key in config.data){
+            switch(key){
+                case 'jizhunnian':
+                case 'pingjianian':
+                case 'jizhunnianGDP':
+                case 'pingjianianGDP':
+                case 'jizhunnianxingzhengquyuneidanyanghuawupaifangliang':
+                case 'pingjianianxingzhengquyuneidanyanghuawupaifangliang':
+                case 'quanguonianjundanyanghuawupaifangqiangduzengsupingjunshuiping':{
+                    t[key] = config.data[key]
+                    break
+                }
+            }
+        }
+        if((t.EmissionIntensityOfPollutantsAirNOResult = EmissionIntensityOfPollutantsAirNO(t)) === false){
+            clearMyLoading()
+            window.history.back()            
+            var closeTips = showTips()
+            setTimeout(function(){
+                closeTips()
+            }, 3000)
+            return
+        }
+        config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsAirNO = {}
+        Object.assign(config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsAirNO, t)
+        
+        t={
+            EmissionIntensityOfPollutantsDateYear: config.data.EmissionIntensityOfPollutantsDateYear,
+            EmissionIntensityOfPollutantsDateMonth: config.data.EmissionIntensityOfPollutantsDateMonth
+        }
+        Object.assign(config.data.EmissionIntensityOfPollutants,t)
+
+        //计算完成，提交后台
+        config.data.statisticsDate = config.data.dateYear + '-' + config.data.dateMonth        
+        window._ajax({
+            url: '/api/submit',
+            data: config.data,
+            method: 'post',
+            dataType: 'json',            
+            success: function(res){
+                if(!!res & res != '-1'){
+                    clearMyLoading()
+                    html = "<i class='fa fa-check-circle-o fa-4x fa-fw' style='color: #00EE00'></i><span class='sr-only'>Success</span>"
+                    clearMyLoading = myLoading("Success",html)
+                    setTimeout(function () {
+                        window.history.back()
+                        clearMyLoading()
+                    },1200)
+                }else{
+                    clearMyLoading()
+                    window.history.back()
+                    var closeTips = showTips('抱歉，提交失败您可以尝试重新提交')
+                    setTimeout(function(){
+                        closeTips()
+                    }, 3000)
+                }
+            }
+        })
+    }else{
+        var closeTips = showTips()
+        setTimeout(function(){
+            closeTips()
+        }, 3000)
+    }
+})

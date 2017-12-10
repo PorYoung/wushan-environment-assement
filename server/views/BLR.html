@@ -41,6 +41,14 @@
                 <label class="labels" for="pingjiaquyutudimianji-all">评价区域土地面积</label>
                 <input class="form-input" type="number" min="0" name="pingjiaquyutudimianji" id="pingjiaquyutudimianji-all">
             </div>
+            <div class="form-group">
+                <label class="labels" for="dateYear-all">数据年份</label>
+                <input class="form-input" type="number" name="dateYear" id="dateYear-all">
+            </div>
+            <div class="form-group">
+                <label class="labels" for="dateMonth-all">数据月份</label>
+                <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-all">
+            </div>
             <div class="form-submit all">确认</div>
         </form>
     </div>
@@ -52,6 +60,14 @@
                     <label class="labels" for="tudiziyuanyalizhishu-category">土地资源压力指数</label>
                     <input class="form-input" type="number" step="0.1" name="tudiziyuanyalizhishu" id="tudiziyuanyalizhishu-category">
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfLandResourcesDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfLandResourcesDateYear" id="EvaluationOfLandResourcesDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfLandResourcesDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfLandResourcesDateMonth" id="EvaluationOfLandResourcesDateMonth-category">
+                </div>
             </form>
         </div>
         <div class="BLR-EvaluationOfUrbanizationArea">
@@ -60,6 +76,14 @@
                 <div class="form-group">
                     <label class="labels" for="chengshiyujianzhizhenzongmianji-category">城市与建制镇总面积(单位:平方公里)</label>
                     <input class="form-input" type="number" min="0" step="10" name="chengshiyujianzhizhenzongmianji" id="chengshiyujianzhizhenzongmianji-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfUrbanizationAreaDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfUrbanizationAreaDateYear" id="EvaluationOfUrbanizationAreaDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfUrbanizationAreaDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfUrbanizationAreaDateMonth" id="EvaluationOfUrbanizationAreaDateMonth-category">
                 </div>
             </form>
         </div>
@@ -94,6 +118,14 @@
                     <label class="labels" for="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping-category">全国年均土地资源利用效率增速平均水平</label>
                     <input class="form-input" type="number" min="0" name="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping" id="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping-category">
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="UtilizationEfficiencyOfLandResourcesDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="UtilizationEfficiencyOfLandResourcesDateYear" id="UtilizationEfficiencyOfLandResourcesDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfEcologicalDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="UtilizationEfficiencyOfLandResourcesDateMonth" id="UtilizationEfficiencyOfLandResourcesDateMonth-category">
+                </div>
             </form>
         </div>
         <div class="BLR-EvaluationOfEcological">
@@ -102,6 +134,27 @@
                 <div class="form-group">
                     <label class="labels" for="pingjiaquyutudimianji-category">评价区域土地面积</label>
                     <input class="form-input" type="number" min="0" name="pingjiaquyutudimianji" id="pingjiaquyutudimianji-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfEcologicalDateYear-category">数据年份</label>
+                    <input class="form-input" type="number" name="EvaluationOfEcologicalDateYear" id="EvaluationOfEcologicalDateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="EvaluationOfEcologicalDateMonth-category">数据月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="EvaluationOfEcologicalDateMonth" id="EvaluationOfEcologicalDateMonth-category">
+                </div>
+            </form>
+        </div>
+        <div class="Date">
+            <header><span>数据录入日期</span></header>
+            <form class="Date-form form">                    
+                <div class="form-group">
+                    <label class="labels" for="dateYear-category">数据录入年份</label>
+                    <input class="form-input" type="number" name="dateYear" id="dateYear-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="dateMonth-category">数据录入月份</label>
+                    <input class="form-input" type="number" min="1" max="12" name="dateMonth" id="dateMonth-category">
                 </div>
             </form>
         </div>
@@ -112,6 +165,7 @@
     <a href="#/BLR/all"><div>直接录入</div></a>
     <i class="fa fa-angle-right fa-2x"></i>
     <a href="#/BLR/category"><div>分类录入</div></a>
+    <a href="/api/logout" class="logout-btn"><div>离开</div></a>
 </header>
 <div class="tips">
     <div class="tips-body">
