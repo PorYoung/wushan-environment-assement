@@ -1,5 +1,6 @@
 <div class="container">
     <div class="list animated">
+    <div class="eva1">
         <header class="headerTitle">
             <span>
                 <h2>基础评价</h2>
@@ -17,7 +18,6 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfLandResourcesDateYear" placeholder="查询年份" class="EvaluationOfLandResourcesDateYear">
-                <input type="number" name="EvaluationOfLandResourcesDateMonth" placeholder="查询月份" class="EvaluationOfLandResourcesDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfLandResources">确定</div>
             </div>
         </div>
@@ -33,7 +33,6 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfWarterResourcesDateYear" placeholder="查询年份" class="EvaluationOfWarterResourcesDateYear">
-                <input type="number" name="EvaluationOfWarterResourcesDateMonth" placeholder="查询月份" class="EvaluationOfWarterResourcesDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfWarterResources">确定</div>
             </div>
         </div>
@@ -65,14 +64,14 @@
                     </div>
 
                 </div>
-                <div class="list-group" class="header2Title">
-                    <span>环境评价 评价结果</span>
-                    <span class="EvaluationOfEnvironmentResult"></span>
-                </div>
+            </div>
+            <div class="list-group" class="header2Title">
+                <i class="fa fa-tag fa-2x"></i>
+                <span>环境评价 评价结果</span>
+                <span class="EvaluationOfEnvironmentResult"></span>
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfEnvironmentDateYear" placeholder="查询年份" class="EvaluationOfEnvironmentDateYear">
-                <input type="number" name="EvaluationOfEnvironmentDateMonth" placeholder="查询月份" class="EvaluationOfEnvironmentDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfEnvironment">确定</div>
             </div>
         </div>
@@ -88,10 +87,11 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfEcologicalDateYear" placeholder="查询年份" class="EvaluationOfEcologicalDateYear">
-                <input type="number" name="EvaluationOfEcologicalDateMonth" placeholder="查询月份" class="EvaluationOfEcologicalDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfEcological">确定</div>
             </div>
         </div>
+    </div>
+    <div class="eva2">
         <header class="headerTitle">
             <h2>专项评价</h2>
         </header>
@@ -107,7 +107,6 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfUrbanizationAreaDateYear" placeholder="查询年份" class="EvaluationOfUrbanizationAreaDateYear">
-                <input type="number" name="EvaluationOfUrbanizationAreaDateMonth" placeholder="查询月份" class="EvaluationOfUrbanizationAreaDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfUrbanizationArea">确定</div>
             </div>
         </div>
@@ -123,10 +122,11 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EvaluationOfKeyEcologicalFunctionAreaDateYear" placeholder="查询年份" class="EvaluationOfKeyEcologicalFunctionAreaDateYear">
-                <input type="number" name="EvaluationOfKeyEcologicalFunctionAreaDateMonth" placeholder="查询月份" class="EvaluationOfKeyEcologicalFunctionAreaDateMonth">
                 <div class="single-query-btn" data-value="EvaluationOfKeyEcologicalFunctionArea">确定</div>
             </div>
         </div>
+    </div>
+    <div class="eva3">
         <header class="headerTitle">
             <h2>过程评价</h2>
         </header>
@@ -142,7 +142,6 @@
             </div>
             <div class="single-query">
                 <input type="number" name="UtilizationEfficiencyOfLandResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfLandResourcesDateYear">
-                <input type="number" name="UtilizationEfficiencyOfLandResourcesDateMonth" placeholder="查询月份" class="UtilizationEfficiencyOfLandResourcesDateMonth">
                 <div class="single-query-btn" data-value="UtilizationEfficiencyOfLandResources">确定</div>
             </div>
         </div>
@@ -158,7 +157,6 @@
             </div>
             <div class="single-query">
                 <input type="number" name="UtilizationEfficiencyOfWarterResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfWarterResourcesDateYear">
-                <input type="number" name="UtilizationEfficiencyOfWarterResourcesDateMonth" placeholder="查询月份" class="UtilizationEfficiencyOfWarterResourcesDateMonth">
                 <div class="single-query-btn" data-value="UtilizationEfficiencyOfWarterResources">确定</div>
             </div>
         </div>
@@ -166,11 +164,6 @@
             <header class="header2Title">
                 <h3>污染物排放强度变化</h3>
             </header>
-            <div class="single-query">
-                <input type="number" name="EmissionIntensityOfPollutantsDateYear" placeholder="查询年份" class="EmissionIntensityOfPollutantsDateYear">
-                <input type="number" name="EmissionIntensityOfPollutantsDateMonth" placeholder="查询月份" class="EmissionIntensityOfPollutantsDateMonth">
-                <div class="single-query-btn" data-value="EmissionIntensityOfPollutants">确定</div>
-            </div>
             <div class="EmissionIntensityOfPollutants-Water-o">
                 <header>
                     <span>水污染物(化学需氧量)排放强度变化</span>
@@ -215,6 +208,10 @@
                     </div>
                 </div>
             </div>
+            <div class="single-query">
+                <input type="number" name="EmissionIntensityOfPollutantsDateYear" placeholder="查询年份" class="EmissionIntensityOfPollutantsDateYear">
+                <div class="single-query-btn" data-value="EmissionIntensityOfPollutants">确定</div>
+            </div>
         </div>
         <div class="EcologicalQuality">
             <header class="header2Title">
@@ -233,10 +230,11 @@
             </div>
             <div class="single-query">
                 <input type="number" name="EcologicalQualityDateYear" placeholder="查询年份" class="EcologicalQualityDateYear">
-                <input type="number" name="EcologicalQualityDateMonth" placeholder="查询月份" class="EcologicalQualityDateMonth">
                 <div class="single-query-btn" data-value="EcologicalQuality">确定</div>
             </div>
         </div>
+    </div>
+    <div class="eva4">
         <header class="headerTitle">
             <h2>类别划分</h2>
         </header>
@@ -275,14 +273,11 @@
     <div class="date">
         <input type="number" name="dateYear" placeholder="查询年份" class="dateYear">
     </div>
-    <i class="fa fa-angle-right fa-2x"></i>
-    <div class="date">
-        <input type="number" name="dateMonth" placeholder="查询月份" class="dateMonth">
-    </div>
     <a href="/api/logout" class="logout-btn">
         <div>离开</div>
     </a>
     <a class="query-btn"><div>确定</div></a>
+    <a href="#/DRC/help" class="help"><div><i class="fa fa-question-circle-o animated pulse infinite"></i>查看帮助</div></a>
 </header>
 <div class="tips">
     <div class="tips-body">
@@ -291,3 +286,4 @@
         <p class="tips-text"></p>
     </div>
 </div>
+<div class="background"></div>

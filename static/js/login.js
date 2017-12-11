@@ -1,5 +1,5 @@
 (function(){
-    window.onload = function(){
+    _addLoadEvent(function(){
         if(!!config.user){
             document.body.style.opacity = '0'
             window._ajax({
@@ -110,6 +110,7 @@
                 url: '/api/login',
                 success: function(res){
                     if(!!res && res.status == '1'){
+                        clearTimeout(timer)
                         qRouter.go('/'+res.username)
                     }else{
                         var closeTips = showTips('密码有误')
@@ -120,8 +121,7 @@
                 }
             })
         }
-    }
-    window.onbeforeunload = function(event){
-        event.returnValue = '信息尚未提交，您确定要离开吗'
-    }
+
+        var timer = bgAnimation()
+    })
 })()

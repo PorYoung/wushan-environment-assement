@@ -24,17 +24,23 @@ function EvaluationOfEcological(data){
 }
 
 function EvaluationOfKeyEcologicalFunctionArea(data){
-    var D = parseFloat(data),
-        res = null
-    if(isNaN(D)){
-        return false
+    var D = {}
+    for(key in data){
+        if(data.hasOwnProperty(key)){
+            var v = parseFloat(data[key])
+            if(isNaN(v)){
+                return false
+            }
+            D[key] = v
+        }
     }
-    if(D > 12.5){
-        res = "水土保持功能高"
-    }else if(D <= 12.5 && D >= 1){
-        res = "水土保持功能高中等"
+    var t = D.shuitulishimianji  / D.xingzhengquyumianji
+    if(D > 0.35){
+        res = "超载"
+    }else if(D <= 0.35 && D >= 0.25){
+        res = "临界超载"
     }else{
-        res = "水土保持功能高低"
+        res = "不超载"
     }
     return res
 }
@@ -60,18 +66,6 @@ qRouter.on('/'+config.user+'/submit',function(){
     if(!!config.data){
         var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
         var clearMyLoading = myLoading("Waiting...",html)
-        //默认所有评测日期为录入日期
-        for(key in config.data){
-            if(key.match(/DateYear/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateYear
-                }
-            }else if(key.match(/DateMonth/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateMonth
-                }
-            }
-        }
         //生态评价
         var t = {}
         for(key in config.data){
@@ -95,15 +89,15 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.EvaluationOfEcologicalDateYear = config.data.EvaluationOfEcologicalDateYear
-        t.EvaluationOfEcologicalDateMonth = config.data.EvaluationOfEcologicalDateMonth
+        t.statisticsDate = config.data.EvaluationOfEcologicalDateYear
         config.data.EvaluationOfEcological = {}
         Object.assign(config.data.EvaluationOfEcological, t)
         //重点生态功能区评价
         t = {
-            shuituliushizhishu: config.data.shuituliushizhishu
+            shuitulishimianji: config.data.shuitulishimianji,
+            xingzhengquyumianji: config.data.xingzhengquyumianji    
         }
-        if((t.EvaluationOfKeyEcologicalFunctionAreaResult = EvaluationOfKeyEcologicalFunctionArea(t.shuituliushizhishu)) === false){
+        if((t.EvaluationOfKeyEcologicalFunctionAreaResult = EvaluationOfKeyEcologicalFunctionArea(t)) === false){
             clearMyLoading()
             window.history.back()            
             var closeTips = showTips()
@@ -112,8 +106,7 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.EvaluationOfKeyEcologicalFunctionAreaDateYear = config.data.EvaluationOfKeyEcologicalFunctionAreaDateYear
-        t.EvaluationOfKeyEcologicalFunctionAreaDateMonth = config.data.EvaluationOfKeyEcologicalFunctionAreaDateMonth
+        t.statisticsDate = config.data.EvaluationOfKeyEcologicalFunctionAreaDateYear
         config.data.EvaluationOfKeyEcologicalFunctionArea = {}
         Object.assign(config.data.EvaluationOfKeyEcologicalFunctionArea, t)
         //林草覆盖率变化
@@ -148,13 +141,11 @@ qRouter.on('/'+config.user+'/submit',function(){
         Object.assign(config.data.EcologicalQuality.EcologicalQualityLincao, t)
 
         t = {
-            EcologicalQualityDateYear: config.data.EcologicalQualityDateYear,
-            EcologicalQualityDateMonth: config.data.EcologicalQualityDateMonth
+            statisticsDate: config.data.pingjianian,
         }
         Object.assign(config.data.EcologicalQuality, t)
 
-        //计算完成，提交后台
-        config.data.statisticsDate = config.data.dateYear + '-' + config.data.dateMonth        
+        //计算完成，提交后台     
         window._ajax({
             url: '/api/submit',
             data: config.data,

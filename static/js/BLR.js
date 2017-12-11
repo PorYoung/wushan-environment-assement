@@ -1,15 +1,19 @@
 function EvaluationOfLandResources(data){
-    var D = parseFloat(data),
-        obj = {
-            EvaluationOfLandResourcesResult: null
+    var D = {}
+    for(key in data){
+        if(data.hasOwnProperty(key)){
+            var v = parseFloat(data[key])
+            if(isNaN(v)){
+                return false
+            }
+            D[key] = v
         }
-    if(isNaN(D)){
-        return false
     }
+    var t = D.jiansheyongdimianji  / D.xingzhengquyumianji
     var res
-    if(D > 0){
+    if(t > 0.15){
         res = "土地资源压力大"
-    }else if(D <= 0 && D >= -0.3){
+    }else if(t <= 0.15 && t >= 0.1){
         res = "土地资源压力中等"
     }else{
         res = "土地资源压力小"
@@ -40,24 +44,11 @@ qRouter.on('/'+config.user+'/submit',function(){
     if(!!config.data){
         var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
         var clearMyLoading = myLoading("Waiting...",html)
-        //默认所有评测日期为录入日期
-        for(key in config.data){
-            if(key.match(/DateYear/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateYear
-                }
-            }else if(key.match(/DateMonth/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateMonth
-                }
-            }
-        }
         var t = {
-            tudiziyuanyalizhishu: config.data.tudiziyuanyalizhishu,
-            EvaluationOfLandResourcesDateYear: config.data.EvaluationOfLandResourcesDateYear,
-            EvaluationOfLandResourcesDateMonth: config.data.EvaluationOfLandResourcesDateMonth
+            jiansheyongdimianji: config.data.jiansheyongdimianji,
+            xingzhengquyumianji: config.data.xingzhengquyumianji    
         }
-        if((t.EvaluationOfLandResourcesResult = EvaluationOfLandResources(t.tudiziyuanyalizhishu)) === false){
+        if((t.EvaluationOfLandResourcesResult = EvaluationOfLandResources(t)) === false){
             clearMyLoading()
             window.history.back()
             var closeTips = showTips()
@@ -66,6 +57,7 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
+        t.statisticsDate = config.data.EvaluationOfLandResourcesDateYear
         config.data.EvaluationOfLandResources = {}
         Object.assign(config.data.EvaluationOfLandResources, t)
         //利用效率
@@ -93,24 +85,20 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.UtilizationEfficiencyOfLandResourcesDateYear = config.data.UtilizationEfficiencyOfLandResourcesDateYear
-        t.UtilizationEfficiencyOfLandResourcesDateMonth = config.data.UtilizationEfficiencyOfLandResourcesDateMonth
+        t.statisticsDate = config.data.pingjianian
         config.data.UtilizationEfficiencyOfLandResources = {}
         Object.assign(config.data.UtilizationEfficiencyOfLandResources, t)
 
         config.data.EvaluationOfUrbanizationArea = {
             chengshiyujianzhizhenzongmianji: config.data.chengshiyujianzhizhenzongmianji,
-            EvaluationOfUrbanizationAreaDateYear: config.data.EvaluationOfUrbanizationAreaDateYear,
-            EvaluationOfUrbanizationAreaDateMonth: config.data.EvaluationOfUrbanizationAreaDateMonth
+            statisticsDate: config.data.EvaluationOfUrbanizationAreaDateYear
         }
         config.data.EvaluationOfEcological = {
             pingjiaquyutudimianji: config.data.pingjiaquyutudimianji,
-            EvaluationOfEcologicalDateYear: config.data.EvaluationOfEcologicalDateYear,
-            EvaluationOfEcologicalDateMonth: config.data.EvaluationOfEcologicalDateMonth
+            statisticsDate: config.data.EvaluationOfEcologicalDateYear
         }
 
         //计算完成，提交后台
-        config.data.statisticsDate = config.data.dateYear + '-' + config.data.dateMonth
         window._ajax({
             url: '/api/submit',
             data: config.data,

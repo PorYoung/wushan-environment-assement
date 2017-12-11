@@ -217,7 +217,6 @@ function _loadJs(src,options){
     script = document.createElement('script')
     script.src = src
     script.type = 'text/javascript'
-    script.setAttribute('class','loadJs')
     if(opt.async){
         script.async = 'async'
     }
@@ -254,3 +253,30 @@ function _loadCss(href,options){
 }
 
 _loadJs('/static/js/myLoading.js')
+
+//Animation
+function bgAnimation(){
+    var animationTimer = null,posX = Math.floor(Math.random() * 60) + 15
+    var bg = document.querySelector('.background'),
+        width = window.innerWidth
+    function animation(){
+        var width = window.innerWidth
+        if(++posX <= 99){
+            bg.style.backgroundPositionX = Math.abs(posX) + '%'
+        }else{
+            posX = -99
+        }
+        if(width > 1700){
+            return animationTimer = setTimeout(animation,50)
+        }else if(width > 1300){
+            return animationTimer = setTimeout(animation, 80)
+        }else if(width > 900){
+            return animationTimer = setTimeout(animation,110)
+        }else if(width > 568){
+            return animationTimer = setTimeout(animation,130)            
+        }else{
+            return animationTimer = setTimeout(animation,140)
+        }
+    }
+    return animationTimer = setTimeout(animation,100)
+}

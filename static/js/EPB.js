@@ -1,3 +1,7 @@
+(function t(){
+        var WaterCountBtn = document.querySelector('.count-btn')
+        WaterCountBtn.addEventListener('click', EvaluationOfEnvironmentWaterCount)
+})()
 function EvaluationOfEnvironmentAir(data){
     var D = {},
         S = {
@@ -12,7 +16,7 @@ function EvaluationOfEnvironmentAir(data){
         if(data.hasOwnProperty(key)){
             var v = parseFloat(data[key])
             if(isNaN(v)){
-                return false
+                continue
             }
             D[key] = v
             var tmp = D[key] / S[key] - 1
@@ -44,52 +48,76 @@ function EvaluationOfEnvironmentWater(data){
             "tpv": 0.05
         },
         RrMax = null,
-        RlMax = null
+        RlMax = null,
+        res = {}
     for(key in data){
         if(data.hasOwnProperty(key)){
             if(key != "shuihuanjingzhiliangjianceduanmian"){
-                var v = parseFloat(data[key])
-                if(isNaN(v)){
-                    return false
-                }
-                D[key] = v
-                if(key == "dov"){
-                    var tmpr = 1 / (D[key] / Sr[key]) - 1,
-                        tmpl = 1 / (D[key] / Sl[key]) - 1
-                    if(RrMax == null || tmpr > RrMax){
-                        RrMax = tmpr
-                    }
-                    if(RlMax == null || tmpl > RlMax){
-                        RlMax = tmpl
+                if(data[key] instanceof Array){
+                    D[key] = []
+                    for(var i = 0;i < data[key].length;i++){
+                        var v = parseFloat(data[key])
+                        if(isNaN(v)){
+                            //不能为空
+                            return false
+                        }
+                        if(key == "dov"){
+                            var tmpr = 1 / (v / Sr[key]) - 1,
+                                tmpl = 1 / (v / Sl[key]) - 1
+                        }else{
+                            var tmpr = v / Sr[key] - 1,
+                                tmpl = v / Sl[key] - 1
+                        }
+                        if(!data.shuihuanjingzhiliangjianceduanmian[i]){
+                            v = tmpr
+                        }else[
+                            v = tmpl
+                        ]
+                        D[key].push(v)
                     }
                 }else{
-                    var tmpr = D[key] / Sr[key] - 1,
-                        tmpl = D[key] / Sl[key] - 1
-                    if(RrMax == null || tmpr > RrMax){
-                        RrMax = tmpr
-                    }
-                    if(RlMax == null || tmpl > RlMax){
-                        RlMax = tmpl
-                    }
+                    //最少为两个断面
+                    return false
                 }
             }else{
                 D[key] = data[key]
             }
         }
     }
-    //水污染物浓度超标指数 分河流断面和湖库断面
-    if(!D.shuihuanjingzhiliangjianceduanmian){
-        return RrMax
-    }else{
-        return RlMax
+    //计算第i项超标指数
+    for(key in D){
+        if(D.hasOwnProperty(key)){
+            var Ri = 0
+            for(var i = 0;i < D[key].length;i++){
+                Ri += D[key][i]
+            }
+            Ri = Ri / D[key].length
+            res[key] = Ri
+        }
     }
+    //计算第k个断面超标指数和区域j水污染物浓度超标指数
+    var Rj = 0
+    for(var i = 0;i < D.dov.length;i++){
+        var Rk = null
+        for(key in D){
+            if(D.hasOwnProperty(key)){
+                if(Rk == null || D[key][i] > Rk){
+                    Rk = D[key][i]
+                }
+            }
+        }
+        Rj += Rk
+    }
+    Rj = Rj / D.dov.length
+    res.EvaluationOfEnvironmentWaterResult = Rj
+    return res
 }
 function EvaluationOfEnvironment(){
     if(!config.data.hasOwnProperty('EvaluationOfEnvironment') || !config.data.EvaluationOfEnvironment.hasOwnProperty('EvaluationOfEnvironmentWater') || !config.data.EvaluationOfEnvironment.hasOwnProperty('EvaluationOfEnvironmentAir')){
         return false
     }else{
-        var a = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir,
-            w = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWarter,
+        var a = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir.EvaluationOfEnvironmentAirResult,
+            w = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWater.EvaluationOfEnvironmentWaterResult,
             R = a > w?a:w,
             res = null
         if(R > 0){
@@ -121,6 +149,7 @@ function EvaluationOfUrbanizationAreaWater(data){
     var Den = D.heichoushuitishicechangdu / D.chengshiyujianzhizhenzongmianji,
         L = D.zhongduheichoushuitichangdu / D.heichoushuitishicechangdu,
         eva = null
+    if(isNaN(L)) L = 0
     if(!D.chengshishuihuanjingpingjiaquyu){
         //优化开发区域
         if(Den < 100){
@@ -332,23 +361,89 @@ function EmissionIntensityOfPollutantsAirNO(data){
         return res
 }
 
+function EvaluationOfEnvironmentWaterCount(){
+    var panel = document.querySelector('.EPB-EvaluationOfEnvironment-Water')
+        input = document.querySelector('.EPB-EvaluationOfEnvironment-Water-count input'),
+        count = parseInt(input.value)
+        if(isNaN(count)){
+            var closeTips = showTips("请检查您的输入")
+            setTimeout(function(){
+                closeTips()
+            },3000)
+            return
+        }else if(count < 2){
+            var closeTips = showTips("最少计算两个断面")
+            setTimeout(function(){
+                closeTips()
+            },3000)
+        }
+        config.EvaluationOfEnvironmentWaterCount = count
+        //生成列表
+        for(var id = 0;id < count;id++){
+            var html = `
+                <header>断面 ${id+1}</header>
+                <div class="form-group">
+                    <label class="labels" for="dov-category-${id}">DO监测值</label>
+                    <input class="form-input" type="number" min="0" name="dov" id="dov-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="codmnv-category-${id}">COD
+                        <sub>Mn</sub>监测值</label>
+                    <input class="form-input" type="number" min="0" name="codmnv" id="codmnv-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="bod5v-category-${id}">BOD
+                        <sub>5</sub>监测值</label>
+                    <input class="form-input" type="number" min="0" name="bod5v" id="bod5v-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="codcrv-category-${id}">COD
+                        <sub>Cr</sub>监测值</label>
+                    <input class="form-input" type="number" min="0" name="codcrv" id="codcrv-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="nh3nv-category-${id}">NH
+                        <sub>3</sub>-N监测值</label>
+                    <input class="form-input" type="number" min="0" name="nh3nv" id="nh3nv-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="tnv-category-${id}">TN监测值</label>
+                    <input class="form-input" type="number" min="0" name="tnv" id="tnv-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="tpv-category-${id}">TP监测值</label>
+                    <input class="form-input" type="number" min="0" name="tpv" id="tpv-category-${id}">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="shuihuanjingzhiliangjianceduanmian-category-${id}">[河流断面/湖库断面]</label>
+                    <div class="toggle-input">
+                        <input class="form-input" type="checkbox" name="shuihuanjingzhiliangjianceduanmian" id="shuihuanjingzhiliangjianceduanmian-category-${id}">
+                        <label class="labels" for="shuihuanjingzhiliangjianceduanmian-category-${id}"></label>
+                    </div>
+                </div>
+            `
+            var form = document.createElement('form')
+            form.className = "EPB-EvaluationOfEnvironment-Water-form form"
+            form.innerHTML = html
+            panel.appendChild(form)
+            var inputArr = form.querySelectorAll('input')
+            inputArr.forEach(function (item) {
+                if (item.type == "button" || item.type == "checkbox" || item.type == "radio") {
+                    return
+                }
+                item.addEventListener('focusin', formInputFocusin)
+                item.addEventListener('focusout', formInputFocusout)
+            })
+        }
+        var WaterCountBtn = document.querySelector('.count-btn')
+        WaterCountBtn.removeEventListener('click', EvaluationOfEnvironmentWaterCount)
+}
+
 qRouter.on('/'+config.user+'/submit',function(){
     if(!!config.data){
         var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
         var clearMyLoading = myLoading("Waiting...",html)
-        //默认所有评测日期为录入日期
-        for(key in config.data){
-            if(key.match(/DateYear/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateYear
-                }
-            }else if(key.match(/DateMonth/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateMonth
-                }
-            }
-        }
-        //环境评价
+    //环境评价
         //空气质量检测
         var t = {}
         for(key in config.data){
@@ -418,8 +513,7 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.EvaluationOfEnvironmentDateYear = config.data.EvaluationOfEnvironmentDateYear
-        t.EvaluationOfEnvironmentDateMonth = config.data.EvaluationOfEnvironmentDateMonth
+        t.statisticsDate = config.data.EvaluationOfEnvironmentDateYear
         Object.assign(config.data.EvaluationOfEnvironment, t)
 
         //城市水环境
@@ -484,8 +578,7 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.EvaluationOfUrbanizationAreaDateYear = config.data.EvaluationOfUrbanizationAreaDateYear
-        t.EvaluationOfUrbanizationAreaDateMonth = config.data.EvaluationOfUrbanizationAreaDateMonth
+        t.statisticsDate = config.data.EvaluationOfUrbanizationAreaDateYear
         Object.assign(config.data.EvaluationOfUrbanizationArea, t)
 
         //水污染物 化学需氧量
@@ -604,13 +697,11 @@ qRouter.on('/'+config.user+'/submit',function(){
         Object.assign(config.data.EmissionIntensityOfPollutants.EmissionIntensityOfPollutantsAirNO, t)
         
         t={
-            EmissionIntensityOfPollutantsDateYear: config.data.EmissionIntensityOfPollutantsDateYear,
-            EmissionIntensityOfPollutantsDateMonth: config.data.EmissionIntensityOfPollutantsDateMonth
+            statisticsDate: config.data.pingjianian
         }
         Object.assign(config.data.EmissionIntensityOfPollutants,t)
 
         //计算完成，提交后台
-        config.data.statisticsDate = config.data.dateYear + '-' + config.data.dateMonth        
         window._ajax({
             url: '/api/submit',
             data: config.data,

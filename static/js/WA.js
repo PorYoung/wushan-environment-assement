@@ -47,18 +47,6 @@ qRouter.on('/'+config.user+'/submit',function(){
     if(!!config.data){
         var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
         var clearMyLoading = myLoading("Waiting...",html)
-        //默认所有评测日期为录入日期
-        for(key in config.data){
-            if(key.match(/DateYear/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateYear
-                }
-            }else if(key.match(/DateMonth/)){
-                if(!config.data[key]){
-                    config.data[key] = config.data.dateMonth
-                }
-            }
-        }
         //水资源评价
         var t = {}
         for(key in config.data){
@@ -82,8 +70,7 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.EvaluationOfWarterResourcesDateYear = config.data.EvaluationOfWarterResourcesDateYear
-        t.EvaluationOfWarterResourcesDateMonth = config.data.EvaluationOfWarterResourcesDateMonth
+        t.statisticsDate = config.data.EvaluationOfWarterResourcesDateYear
         config.data.EvaluationOfWarterResources = {}
         Object.assign(config.data.EvaluationOfWarterResources, t)
         //水资源利用效率变化
@@ -111,13 +98,11 @@ qRouter.on('/'+config.user+'/submit',function(){
             }, 3000)
             return
         }
-        t.UtilizationEfficiencyOfWarterResourcesDateYear = config.data.UtilizationEfficiencyOfWarterResourcesDateYear
-        t.UtilizationEfficiencyOfWarterResourcesDateMonth = config.data.UtilizationEfficiencyOfWarterResourcesDateMonth
+        t.statisticsDate = config.data.pingjianian
         config.data.UtilizationEfficiencyOfWarterResources = {}
         Object.assign(config.data.UtilizationEfficiencyOfWarterResources, t)
 
         //计算完成，提交后台
-        config.data.statisticsDate = config.data.dateYear + '-' + config.data.dateMonth        
         window._ajax({
             url: '/api/submit',
             data: config.data,

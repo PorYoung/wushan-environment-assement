@@ -4,7 +4,6 @@
     display: -ms-flexbox;
     display: flex;
 }
-
 .flex1 {
     -webkit-flex: 1;        /* Chrome */  
     -ms-flex: 1;             /* IE 10 */  
@@ -12,7 +11,6 @@
     -webkit-box-flex: 1;     /* OLD - iOS 6-, Safari 3.1-6 */  
     -moz-box-flex: 1;       /* OLD - Firefox 19- */       
 }
-
 html,body{
     padding:0;
     margin:0;
@@ -24,6 +22,11 @@ ul{
     list-style: none;
     -webkit-padding-start: 0;
 }
+
+.filterbg{
+    display: none;
+}
+
 .background{
     position:absolute;
     top:0;
@@ -32,7 +35,7 @@ ul{
     bottom:0;
     z-index: -1;
     background-image: url('/static/image/bg.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -69,8 +72,9 @@ ul{
     -moz-transform: scale3d(1.2,1.1,1.2);
     -webkit-transform: scale3d(1.2,1.1,1.2);
     -o-transform: scale3d(1.2,1.1,1.2);
-    color: #ff7f50 !important;
-    background-color: rgba(255,255,255,.3);
+    color: #fd4705 !important;
+    padding: 5px;
+    background-color: rgba(255,255,255,.6);
 }
 
 .username{
@@ -81,9 +85,11 @@ ul{
     text-align: center;
     padding: 10px;
     background-color: rgba(255,255,255,.3);
-    border-radius: 50%;
+    border-radius: 10px;
     width: 50%;
     margin-left: 25%;
+    cursor: default;
+    font-weight: 400;
 }
 
 .user-list {
@@ -108,6 +114,7 @@ ul{
     flex-direction: column;
     text-align: center;
     color: #eeeeee;
+    font-weight: 800;
     cursor: pointer;
 }
 
@@ -157,11 +164,11 @@ ul{
 .login-btn{
 	cursor: pointer;
 	background: rgb(61, 157, 179);
-	padding: 3px 2px;
+	padding: 5px 8px;
 	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
 	color: #fff;
 	font-size: 24px;
-	border: 1px solid rgb(28, 108, 122);
+	border: 1px solid rgba(28, 108, 122, .3);
 	margin-bottom: 10px;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 	-webkit-border-radius: 3px;
@@ -169,17 +176,27 @@ ul{
 	border-radius: 3px;
 	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
 	        0px 0px 0px 3px rgb(254, 254, 254),
-	        0px 5px 3px 3px rgb(210, 210, 210);
+	        0px 2px 3px 3px rgb(210, 210, 210);
 	-moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
 	        0px 0px 0px 3px rgb(254, 254, 254),
-	        0px 5px 3px 3px rgb(210, 210, 210);
-	box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,           0px 0px 0px 3px rgb(254, 254, 254),           0px 5px 3px 3px rgb(210, 210, 210);
+	        0px 2px 3px 3px rgb(210, 210, 210);
+	box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,           0px 0px 0px 3px rgb(254, 254, 254),           0px 2px 3px 3px rgb(210, 210, 210);
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
 	-o-transition: all 0.2s linear;
 	transition: all 0.2s linear;
 }
 
+.login-btn:hover{
+    -webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+        0px 0px 0px 3px rgb(28, 108, 122),
+        0px 2px 3px 3px rgb(210, 210, 210);
+    -moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+        0px 0px 0px 3px rgb(28, 108, 122),
+        0px 2px 3px 3px rgb(210, 210, 210);
+    box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,           0px 0px 0px 3px rgb(28, 108, 122),           0px 2px 3px 3px rgb(210, 210, 210);
+    border: 1px solid rgb(254, 254, 254);
+}
 
 .tips{
     background: hsla(55,75%,81%,.85);
@@ -195,6 +212,7 @@ ul{
     padding: 16px 50px 16px 0;
     width: 100%;
     z-index: -1;
+    opacity: 0;
 }
 .tips-body{
     position: relative;
@@ -242,3 +260,17 @@ ul{
         min-height: 300px;
     }
 }
+
+/* @media screen and (min-width: 1200px) {
+    .filterbg{
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: block !important;
+        border-radius: 50%;
+        box-shadow: 0 0 1000px #eee;
+        /* mix-blend-mode:  */
+    }
+} */

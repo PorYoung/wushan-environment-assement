@@ -25,10 +25,10 @@
         }
     }
 
-    var dateMonth = document.querySelector('.dateMonth'),
+    var dateYear = document.querySelector('.dateYear'),
         queryBtn = document.querySelector('.query-btn'),
         singleQueryBtn = document.querySelectorAll('.single-query-btn')
-    dateMonth.addEventListener('keyup', queryStatistics)
+    dateYear.addEventListener('keyup', queryStatistics)
     queryBtn.addEventListener('click', queryStatistics)
 
     singleQueryBtn.forEach(function(item){
@@ -41,19 +41,18 @@
             item.innerHTML = "暂无数据"
         })
         if (event.keyCode == 13 || event.type.indexOf('click') != '-1') {
-            var year = document.querySelector('.dateYear').value,
-                month = document.querySelector('.dateMonth').value
-            if (year == '' || month == '') {
+            var year = document.querySelector('.dateYear').value
+            if (year == '') {
                 var closeTips = showTips()
-                dateMonth.removeEventListener('keyup', queryStatistics)
+                dateYear.removeEventListener('keyup', queryStatistics)
                 queryBtn.removeEventListener('click', queryStatistics)    
                 setTimeout(function () {
                     closeTips()
-                    dateMonth.addEventListener('keyup', queryStatistics)
+                    dateYear.addEventListener('keyup', queryStatistics)
                     queryBtn.addEventListener('click', queryStatistics)    
                 })
             } else {
-                statisticsDate = year + '-' + month
+                statisticsDate = year
                 var html = "<i class='fa fa-spinner fa-pulse fa-3x fa-fw'></i><span class='sr-only'>Loading...</span>"
                 var clearMyLoading = myLoading("Loading...", html)
                 window._ajax({
@@ -69,8 +68,6 @@
                             input.forEach(function(item){
                                 if(item.className.match(/DateYear/)){
                                     item.value = year
-                                }else if(item.className.match(/DateMonth/)){
-                                    item.value = month
                                 }
                             })
 
@@ -79,20 +76,6 @@
 
                             //读取数据
                             expandObject(config.data)
-                            function expandObject(obj) {
-                                for (key in obj) {
-                                    if (typeof obj[key] === "object") {
-                                        expandObject(obj[key])
-                                    } else {
-                                        if (typeof obj[key] != "function") {
-                                            var item = document.querySelector('.' + key)
-                                            if (!!item) {
-                                                item.innerHTML = obj[key]
-                                            }
-                                        }
-                                    }
-                                }
-                            }
                             //类别划分
                             categoryProcessEvaluation()
                             setTimeout(function () {
@@ -135,6 +118,7 @@ function showTips(str) {
 function expandObject(obj) {
     for (key in obj) {
         if (typeof obj[key] === "object") {
+            if(obj[key] instanceof Array) continue
             expandObject(obj[key])
         } else {
             if (typeof obj[key] != "function") {
@@ -166,18 +150,12 @@ function queryStatistics(sid) {
         success: function (res) {
             if (!!res && res != '-1') {
                 var body = document.body,
-                    dateYear = document.querySelector('.dateYear'),
-                    dateMonth = document.querySelector('.dateMonth'),
-                    year = sid.split('-')[0],
-                    month = sid.split('-')[1]
-                dateYear.value = year
-                dateMonth.value = month
+                    dateYear = document.querySelector('.dateYear')
+                dateYear.value = sid
                 var input = document.querySelectorAll('input')
                 input.forEach(function(item){
                     if(item.className.match(/DateYear/)){
-                        item.value = year
-                    }else if(item.className.match(/DateMonth/)){
-                        item.value = month
+                        item.value = sid
                     }
                 })
                 body.style.opacity = '0'
@@ -205,10 +183,9 @@ function queryStatistics(sid) {
 
 function querySingle(){
     var query = this.dataset.value,
-        queryInput = this.parentNode.querySelectorAll('input'),
-        queryYear = queryInput[0].value,
-        queryMonth = queryInput[1].value
-    if(!queryYear || !queryMonth){
+        queryInput = this.parentNode.querySelector('input'),
+        queryYear = queryInput.value
+    if(!queryYear){
         var closeTips = showTips()
         setTimeout(function(){
             closeTips()
@@ -221,11 +198,20 @@ function querySingle(){
         url: '/api/statistic',
         data: {
             queryString: query,
-            year: queryYear,
-            month: queryMonth
+            statisticsDate: queryYear
         },
         success: function(res){
-            if(!!res && res != '-1'){
+            if(!!res && res == '-2'){
+                var resultSpan = document.querySelectorAll('span[class*="Result"]')
+                resultSpan.forEach(function (item) {
+                    if(item.className.indexOf(query) != '-1'){
+                        item.innerHTML = "暂无数据"
+                    }
+                })
+                setTimeout(function () {
+                    clearMyLoading()
+                }, 1200)
+            }else if(!!res && res != '-1'){
                 switch(query){
                     case 'EvaluationOfLandResources':
                     case 'UtilizationEfficiencyOfLandResources':{
@@ -256,15 +242,7 @@ function querySingle(){
                 setTimeout(function () {
                     clearMyLoading()
                 }, 1200)
-            }else if(res == '-2'){
-                var resultSpan = document.querySelectorAll('span[class*="Result"]')
-                resultSpan.forEach(function (item) {
-                    if(item.className.indexOf(query) != '-1'){
-                        item.innerHTML = "暂无数据"
-                    }
-                })
-            }
-            else{
+            }else {
                 var closeTips = showTips("获取失败，请检查您的输入或稍后再试")
                 setTimeout(function () {
                     clearMyLoading()
