@@ -117,15 +117,15 @@ function EvaluationOfEnvironment(){
         return false
     }else{
         var a = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentAir.EvaluationOfEnvironmentAirResult,
-            w = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWater.EvaluationOfEnvironmentWaterResult,
-            R = a > w?a:w,
+            w = config.data.EvaluationOfEnvironment.EvaluationOfEnvironmentWater.EvaluationOfEnvironmentWaterResult.EvaluationOfEnvironmentWaterResult,
+            Rtmp = a > w?a:w,
             res = null
-        if(R > 0){
-            res = '污染物浓度超标'
-        }else if(R > -0.2){
-            res = '污染物浓度接近超标'
+        if(Rtmp > 0){
+            res = '污染物浓度超标指数: ' + Rtmp + ' , 污染物浓度超标'
+        }else if(Rtmp > -0.2){
+            res = '污染物浓度超标指数: ' + Rtmp + ' , 污染物浓度接近超标'
         }else{
-            res = '污染物浓度未超标'
+            res = '污染物浓度超标指数: ' + Rtmp + ' , 污染物浓度未超标'
         }
     }
     return res
@@ -154,46 +154,46 @@ function EvaluationOfUrbanizationAreaWater(data){
         //优化开发区域
         if(Den < 100){
             if(L < 0.25){
-                eva = '轻度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 轻度污染'
             }else{
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }
         }else if(Den >= 100 && D < 500){
             if(L < 0.25){
-                eva = '轻度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 轻度污染'
             }else if(L < 0.5){
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }else{
-                eva = '重度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 重度污染'
             }
         }else{
             if(L < 0.25){
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }else{
-                eva = '重度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 重度污染'
             }
         }
     }else{
         //重点开发区域
         if(Den < 300){
             if(L < 0.33){
-                eva = '轻度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 轻度污染'
             }else{
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }
         }else if(Den >= 300 && D < 800){
             if(L < 0.33){
-                eva = '轻度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 轻度污染'
             }else if(L < 0.66){
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }else{
-                eva = '重度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 重度污染'
             }
         }else{
             if(L < 0.33){
-                eva = '中度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 中度污染'
             }else{
-                eva = '重度污染'
+                eva = '黑臭水体密度: ' + Den + '重点黑臭比例: ' + L + ' , 重度污染'
             }
         }
     }
@@ -221,23 +221,23 @@ function EvaluationOfUrbanizationAreaAir(data){
         if(D.hexinchengshizhuchengqu){
             //核心城市
             if(D.pm2d5nianchaobiaotianshu < 30){
-                eva = '轻度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 轻度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 90){
-                eva = '中度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 中度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 180){
-                eva = '重度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 重度污染'
             }else{
-                eva = '严重污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 严重污染'
             }
         }else{
             if(D.pm2d5nianchaobiaotianshu < 60){
-                eva = '轻度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 轻度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 120){
-                eva = '中度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 中度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 210){
-                eva = '重度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 重度污染'
             }else{
-                eva = '严重污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 严重污染'
             }
         }
     }else{
@@ -245,23 +245,23 @@ function EvaluationOfUrbanizationAreaAir(data){
         if(D.hexinchengshizhuchengqu){
             //核心城市
             if(D.pm2d5nianchaobiaotianshu < 60){
-                eva = '轻度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 轻度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 120){
-                eva = '中度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 中度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 210){
-                eva = '重度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 重度污染'
             }else{
-                eva = '严重污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 严重污染'
             }
         }else{
             if(D.pm2d5nianchaobiaotianshu < 120){
-                eva = '轻度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 轻度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 180){
-                eva = '中度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 中度污染'
             }else if(D.pm2d5nianchaobiaotianshu < 240){
-                eva = '重度污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 重度污染'
             }else{
-                eva = '严重污染'
+                eva = '年超标天数: ' + D.pm2d5nianchaobiaotianshu + ' , 严重污染'
             }
         }
     }
@@ -272,12 +272,12 @@ function  EvaluationOfUrbanizationArea(){
     if(!config.data.hasOwnProperty('EvaluationOfUrbanizationArea') || !config.data.EvaluationOfUrbanizationArea.hasOwnProperty('EvaluationOfUrbanizationAreaWater') || !config.data.EvaluationOfUrbanizationArea.hasOwnProperty('EvaluationOfUrbanizationAreaAir')){
         return false
     }else{
-        var a = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaAir,
-            b = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater,
+        var a = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaAir.EvaluationOfUrbanizationAreaAirResult,
+            b = config.data.EvaluationOfUrbanizationArea.EvaluationOfUrbanizationAreaWater.EvaluationOfUrbanizationAreaWaterResult,
             res = null
-        if(a === '严重污染' || (a === '重度污染' && b === '重度污染')){
+        if(a.indexOf('严重污染') != -1 || (a.indexOf('重度污染') != -1 && b.indexOf('重度污染') != -1)){
             res =  '水气环境黑灰指数超载'
-        }else if(b === '重度污染' || a === '重度污染' || (a === '中度污染' && b === '中度污染')){
+        }else if(b.indexOf('重度污染') != -1 || a.indexOf('重度污染') != -1 || (a.indexOf('中度污染') != -1 && b.indexOf('中度污染') != -1)){
             res =  '水气环境黑灰指数临界超载'
         }else{
             res = '水气环境黑灰指数未超载'
@@ -376,6 +376,7 @@ function EvaluationOfEnvironmentWaterCount(){
             setTimeout(function(){
                 closeTips()
             },3000)
+            return
         }
         config.EvaluationOfEnvironmentWaterCount = count
         //生成列表

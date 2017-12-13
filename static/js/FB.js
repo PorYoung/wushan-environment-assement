@@ -14,11 +14,11 @@ function EvaluationOfEcological(data){
         H = Ad / At,
         res = null
     if(H > 0.1){
-        res = '生态系统健康度低'
+        res = '强烈及以上水土流失面积比例: ' + H + ' , 生态系统健康度低'
     }else if(H > 0.05){
-        res = '生态系统健康度中等'
+        res = '强烈及以上水土流失面积比例: ' + H + ' , 生态系统健康度中等'
     }else{
-        res = '生态系统健康度高'
+        res = '强烈及以上水土流失面积比例: ' + H + ' , 生态系统健康度高'
     }
     return res
 }
@@ -35,12 +35,12 @@ function EvaluationOfKeyEcologicalFunctionArea(data){
         }
     }
     var t = D.shuitulishimianji  / D.xingzhengquyumianji
-    if(D > 0.35){
-        res = "超载"
-    }else if(D <= 0.35 && D >= 0.25){
-        res = "临界超载"
+    if(t > 0.35){
+        res = "指标结果: " + t + " , 低等"
+    }else if(t <= 0.35 && t >= 0.25){
+        res = "指标结果: " + t + " , 临界超载"
     }else{
-        res = "不超载"
+        res = "指标结果: " + t + " , 不超载"
     }
     return res
 }

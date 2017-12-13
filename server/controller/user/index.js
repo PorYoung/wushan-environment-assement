@@ -1,8 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
-import { inflate } from 'zlib';
-import { userInfo } from 'os';
 
 export default class{
     static async fn_login_index(req, res, next) {
@@ -80,15 +78,12 @@ export default class{
 
     static async user_page_load(req, res, next) {
         let username = req.session.username
-        username = username.toUpperCase()
-        fs.createReadStream(path.join(__dirname + '../../../views/'+ username +'.html')).pipe(res)
+        fs.createReadStream(path.resolve(__dirname + '../../../views/'+ username +'.html')).pipe(res)
     }
 
     static async statistics_submit(req, res, next){
         let data = req.body,
             username = req.session.username
-        console.log(data)
-        console.log(username)
         if(!data || !username){
             return res.send('-1')
         }else{

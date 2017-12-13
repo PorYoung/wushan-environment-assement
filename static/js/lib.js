@@ -180,6 +180,7 @@ function _addLoadEvent(func) {
 function showTips(str) {
     document.querySelector('.tips-text').innerHTML = str || '请检查您的输入'
     document.querySelector('.tips').style.zIndex = '999'
+    document.querySelector('.tips').style.opacity = '1'
     document.querySelector('.tips').classList.addClass('animated flipInX')
     document.body.classList.addClass('animated shake')
     return function () {
@@ -187,6 +188,7 @@ function showTips(str) {
         document.querySelector('.tips').classList.removeClass('animated flipInX')
         document.querySelector('.tips').classList.addClass('animated flipOutY')
         setTimeout(function () {
+            document.querySelector('.tips').style.opacity = '0'
             document.querySelector('.tips').style.zIndex = '-1'
             document.querySelector('.tips').classList.removeClass('animated flipOutY')
         }, 1000)

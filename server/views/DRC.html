@@ -1,177 +1,527 @@
 <div class="container">
-    <div class="list animated">
-    <div class="eva1">
-        <header class="headerTitle">
-            <span>
-                <h2>基础评价</h2>
-            </span>
-        </header>
-        <div class="EvaluationOfLandResources">
-            <header class="header2Title">
-                <h3>土地资源评价</h3>
-            </header>
-            <div class="EvaluationOfLandResources-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EvaluationOfLandResourcesResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfLandResourcesDateYear" placeholder="查询年份" class="EvaluationOfLandResourcesDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfLandResources">确定</div>
-            </div>
-        </div>
-        <div class="EvaluationOfWarterResources">
-            <header class="header2Title">
-                <h3>水资源评价</h3>
-            </header>
-            <div class="EvaluationOfWarterResources-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EvaluationOfWarterResourcesResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfWarterResourcesDateYear" placeholder="查询年份" class="EvaluationOfWarterResourcesDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfWarterResources">确定</div>
-            </div>
-        </div>
-        <div class="EvaluationOfEnvironment">
-            <header class="header2Title">
+    <div class="list showlist animated">
+        <div class="eva1">
+            <header class="headerTitle">
                 <span>
-                    <h3>环境评价</h3>
+                    <h2>基础评价</h2>
                 </span>
             </header>
-            <div class="EvaluationOfEnvironment-Air">
-                <header>
-                    <span>大气环境质量检测</span>
+            <div class="EvaluationOfLandResources">
+                <header class="header2Title">
+                    <h3>土地资源评价</h3>
                 </header>
-                <div class="EvaluationOfEnvironment-Air-list a-list">
+                <div class="EvaluationOfLandResources-list a-list">
                     <div class="list-group">
                         <i class="fa fa-tag fa-2x"></i>
-                        <span class="EvaluationOfEnvironmentAirResult"></span>
+                        <span class="EvaluationOfLandResourcesResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfLandResourcesDateYear" placeholder="查询年份" class="EvaluationOfLandResourcesDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfLandResources">确定</div>
+                </div>
+            </div>
+            <div class="EvaluationOfWarterResources">
+                <header class="header2Title">
+                    <h3>水资源评价</h3>
+                </header>
+                <div class="EvaluationOfWarterResources-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EvaluationOfWarterResourcesResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfWarterResourcesDateYear" placeholder="查询年份" class="EvaluationOfWarterResourcesDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfWarterResources">确定</div>
+                </div>
+            </div>
+            <div class="EvaluationOfEnvironment">
+                <header class="header2Title">
+                    <span>
+                        <h3>环境评价</h3>
+                    </span>
+                </header>
+                <div class="EvaluationOfEnvironment-Air">
+                    <header>
+                        <span>大气环境质量检测</span>
+                    </header>
+                    <div class="EvaluationOfEnvironment-Air-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EvaluationOfEnvironmentAirResult"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="EPB-EvaluationOfEnvironment-Water">
+                    <header>
+                        <span>水环境质量检测值</span>
+                    </header>
+                    <div class="EvaluationOfEnvironment-Water-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EvaluationOfEnvironmentWaterResult"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="list-group" class="header2Title">
+                    <i class="fa fa-tag fa-2x"></i>
+                    <span>环境评价 评价结果</span>
+                    <span class="EvaluationOfEnvironmentResult"></span>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfEnvironmentDateYear" placeholder="查询年份" class="EvaluationOfEnvironmentDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfEnvironment">确定</div>
+                </div>
+            </div>
+            <div class="EvaluationOfEcological">
+                <header class="header2Title">
+                    <h3>生态评价</h3>
+                </header>
+                <div class="EvaluationOfEcological-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EvaluationOfEcologicalResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfEcologicalDateYear" placeholder="查询年份" class="EvaluationOfEcologicalDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfEcological">确定</div>
+                </div>
+            </div>
+        </div>
+        <div class="eva2">
+            <header class="headerTitle">
+                <h2>专项评价</h2>
+            </header>
+            <div class="EvaluationOfUrbanizationArea">
+                <header class="header2Title">
+                    <h3>城市化地区评价</h3>
+                </header>
+                <div class="EvaluationOfUrbanizationArea-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EvaluationOfUrbanizationAreaResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfUrbanizationAreaDateYear" placeholder="查询年份" class="EvaluationOfUrbanizationAreaDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfUrbanizationArea">确定</div>
+                </div>
+            </div>
+            <div class="EvaluationOfKeyEcologicalFunctionArea">
+                <header class="header2Title">
+                    <h3>重点生态功能区评价</h3>
+                </header>
+                <div class="EvaluationOfKeyEcologicalFunctionArea-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EvaluationOfKeyEcologicalFunctionAreaResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EvaluationOfKeyEcologicalFunctionAreaDateYear" placeholder="查询年份" class="EvaluationOfKeyEcologicalFunctionAreaDateYear">
+                    <div class="single-query-btn" data-value="EvaluationOfKeyEcologicalFunctionArea">确定</div>
+                </div>
+            </div>
+        </div>
+        <div class="eva3">
+            <header class="headerTitle">
+                <h2>集成评价 超载类型</h2>
+            </header>
+            <div class="chaozaileixingEvaluation a-list">
+                <div class="list-group">
+                    <i class="fa fa-tag fa-2x"></i>
+                    <span class="chaozaileixingEvaluationResult"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="eva4">
+            <header class="headerTitle">
+                <h2>过程评价</h2>
+            </header>
+            <div class="UtilizationEfficiencyOfLandResources">
+                <header class="header2Title">
+                    <h3>土地资源利用效率变化</h3>
+                </header>
+                <div class="UtilizationEfficiencyOfLandResources-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="UtilizationEfficiencyOfLandResourcesResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="UtilizationEfficiencyOfLandResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfLandResourcesDateYear">
+                    <div class="single-query-btn" data-value="UtilizationEfficiencyOfLandResources">确定</div>
+                </div>
+            </div>
+            <div class="UtilizationEfficiencyOfWarterResources">
+                <header class="header2Title">
+                    <h3>水资源利用效率变化</h3>
+                </header>
+                <div class="UtilizationEfficiencyOfWarterResources-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="UtilizationEfficiencyOfWarterResourcesResult"></span>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="UtilizationEfficiencyOfWarterResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfWarterResourcesDateYear">
+                    <div class="single-query-btn" data-value="UtilizationEfficiencyOfWarterResources">确定</div>
+                </div>
+            </div>
+            <div class="EmissionIntensityOfPollutants">
+                <header class="header2Title">
+                    <h3>污染物排放强度变化</h3>
+                </header>
+                <div class="EmissionIntensityOfPollutants-Water-o">
+                    <header>
+                        <span>水污染物(化学需氧量)排放强度变化</span>
+                    </header>
+                    <div class="EmissionIntensityOfPollutants-Water-o-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EmissionIntensityOfPollutantsWaterOResult"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="EPB-EmissionIntensityOfPollutants-Water-n">
+                    <header>
+                        <span>水污染物(氨氮)排放强度变化</span>
+                    </header>
+                    <div class="EmissionIntensityOfPollutants-Water-n-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EmissionIntensityOfPollutantsWaterNResult"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="EPB-EmissionIntensityOfPollutants-Air-so2">
+                    <header>
+                        <span>大气污染物污染物(二氧化硫)排放强度变化</span>
+                    </header>
+                    <div class="EmissionIntensityOfPollutants-Air-so2-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EmissionIntensityOfPollutantsAirSO2Result"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="EPB-EmissionIntensityOfPollutants-Air-no">
+                    <header>
+                        <span>大气污染物污染物(氮氧化物)排放强度变化</span>
+                    </header>
+                    <div class="EmissionIntensityOfPollutants-Air-no-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EmissionIntensityOfPollutantsAirNOResult"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EmissionIntensityOfPollutantsDateYear" placeholder="查询年份" class="EmissionIntensityOfPollutantsDateYear">
+                    <div class="single-query-btn" data-value="EmissionIntensityOfPollutants">确定</div>
+                </div>
+            </div>
+            <div class="EcologicalQuality">
+                <header class="header2Title">
+                    <h3>生态质量评价</h3>
+                </header>
+                <div class="EcologicalQualityLincao">
+                    <header>
+                        <span>林草覆盖率变化</span>
+                    </header>
+                    <div class="EcologicalQualityLincao-list a-list">
+                        <div class="list-group">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="EcologicalQualityLincaoResult"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-query">
+                    <input type="number" name="EcologicalQualityDateYear" placeholder="查询年份" class="EcologicalQualityDateYear">
+                    <div class="single-query-btn" data-value="EcologicalQuality">确定</div>
+                </div>
+            </div>
+        </div>
+        <div class="eva5">
+            <header class="headerTitle">
+                <h2>集成评价 类别划分</h2>
+            </header>
+            <div class="categoryProcessEvaluation">
+                <header class="header2Title">
+                    <h3>资源利用效率变化</h3>
+                </header>
+                <div class="UtilizationEfficiencyOfResourcesCategory-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="UtilizationEfficiencyOfResourcesCategoryResult"></span>
+                    </div>
+                </div>
+                <header class="header2Title">
+                    <h3>污染物排放强度变化</h3>
+                </header>
+                <div class="EmissionIntensityOfPollutantsCategory-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EmissionIntensityOfPollutantsCategoryResult"></span>
+                    </div>
+                </div>
+                <header class="header2Title">
+                    <h3>生态质量变化</h3>
+                </header>
+                <div class="EcologicalQualityCategory-list a-list">
+                    <div class="list-group">
+                        <i class="fa fa-tag fa-2x"></i>
+                        <span class="EcologicalQualityCategoryResult"></span>
+                    </div>
+                </div>
+                <div>
+                    <header class="header2Title">
+                        <h3>资源环境耗损指数</h3>
+                    </header>
+                    <div class="ziyuansunhaozhishu a-list">
+                        <div class="list-group" class="header2Title">
+                            <i class="fa fa-tag fa-2x"></i>
+                            <span class="ziyuansunhaozhishuResult"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="eva6">
+            <header class="headerTitle">
+                <h2>集成评价 预警等级</h2>
+            </header>
+            <div class="yujingdengji a-list">
+                <div class="list-group" class="header2Title">
+                    <i class="fa fa-tag fa-2x"></i>
+                    <span class="yujingdengjiResult"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list detail">
+        <header>
+            <h2>该年份各部门详细输入数据</h3>
+        </header>
+        <div class="BLR-form">
+            <div class="BLR-EvaluationOfLandResources-form form">
+                <header><span>土地资源评价</span></header>
+                <div class="form-group">
+                    <label class="labels" for="jiansheyongdimianji-category">建设用地面积(单位:平方公里)</label>
+                    <input class="form-input" type="number" step="0.1" name="jiansheyongdimianji" id="jiansheyongdimianji-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="xingzhengquyumianji-category">行政区域总面积(单位:平方公里)</label>
+                    <input class="form-input" type="number" step="0.1" name="xingzhengquyumianji" id="xingzhengquyumianji-category">
+                </div>
+            </div>
+            <div class="BLR-UtilizationEfficiencyOfLandResources-form form">
+                <header><span>土地资源利用效率变化</span></header>
+                <div class="form-group">
+                    <label class="labels" for="jizhunnian-category">基准年</label>
+                    <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="pingjianian-category">评价年</label>
+                    <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="jizhunnianxingzhengquyuneijiansheyongdimianji-category">基准年行政区域内建设用地面积(单位:公顷)</label>
+                    <input class="form-input" type="number" step="10" name="jizhunnianxingzhengquyuneijiansheyongdimianji" id="jizhunnianxingzhengquyuneijiansheyongdimianji-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="jizhunnianGDP-category">基准年GDP(单位:亿元)</label>
+                    <input class="form-input" type="number" name="jizhunnianGDP" id="jizhunnianGDP-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="pingjianianxingzhengquyuneijiansheyongdimianji-category">评价年行政区域内建设用地面积</label>
+                    <input class="form-input" type="number" name="pingjianianxingzhengquyuneijiansheyongdimianji" id="pingjianianxingzhengquyuneijiansheyongdimianji-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels" for="pingjianianGDP-category">评价年GDP(单位:亿元)</label>
+                    <input class="form-input" type="number" name="pingjianianGDP" id="pingjianianGDP-category">
+                </div>
+                <div class="form-group">
+                    <label class="labels input-active" for="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping-category">全国年均土地资源利用效率增速平均水平(格式:小数)</label>
+                    <input class="form-input" type="number" name="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping" id="quanguonianjuntudiziyuanliyongxiaolvzengsushuiping-category" value="0.0424" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="EPB-form">
+            <div class="EPB-EvaluationOfEnvironment-Air">
+                <header style="margin-bottom:5px;">
+                    <span>
+                        <h2>环境评价</h2>
+                    </span>
+                </header>
+                <header>
+                    <span>大气环境质量检测(单位:μg/m<sup>3</sup>)</span>
+                </header>
+                <div class="EPB-EvaluationOfEnvironment-Air-form form">
+                    <div class="form-group">
+                        <label class="labels" for="so2v-category">SO
+                            <sub>2</sub>监测值</label>
+                        <input class="form-input" type="number" name="so2v" id="so2v-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="no2v-category">NO
+                            <sub>2</sub>监测值</label>
+                        <input class="form-input" type="number" name="no2v" id="no2v-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pm10v-category">PM
+                            <sub>10</sub>监测值</label>
+                        <input class="form-input" type="number" name="pm10v" id="pm10v-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="cov-category">CO监测值</label>
+                        <input class="form-input" type="number" name="cov" id="cov-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="o3v-category">O
+                            <sub>3</sub>监测值</label>
+                        <input class="form-input" type="number" name="o3v" id="o3v-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pm2d5v-category">PM
+                            <sub>2.5</sub>监测值</label>
+                        <input class="form-input" type="number" name="pm2d5v" id="pm2d5v-category">
                     </div>
                 </div>
             </div>
             <div class="EPB-EvaluationOfEnvironment-Water">
                 <header>
-                    <span>水环境质量检测值</span>
+                    <span>水环境质量检测值(单位:pH无量纲, mg/L)</span>
                 </header>
-                <div class="EvaluationOfEnvironment-Water-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EvaluationOfEnvironmentWaterResult"></span>
+                <div class="list-form all form">
+                        <div class="form-group">
+                            <label class="labels" for="dov-all">DO多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="dov" id="dov-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="codmnv-all">COD
+                                <sub>Mn</sub>多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="codmnv" id="codmnv-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="bod5v-all">BOD
+                                <sub>5</sub>多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="bod5v" id="bod5v-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="codcrv-all">COD
+                                <sub>Cr</sub>多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="codcrv" id="codcrv-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="nh3nv-all">NH
+                                <sub>3</sub>-N多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="nh3nv" id="nh3nv-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="tnv-all">TN多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="tnv" id="tnv-all">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="tpv-all">TP多个断面综合计算值</label>
+                            <input class="form-input" type="number" min="0" name="tpv" id="tpv-all">
+                        </div>
                     </div>
-
+            </div>
+            <div class="EPB-EvaluationOfUrbanizationArea">
+                <header style="margin-bottom:5px;">
+                    <span>
+                        <h2>城市化地区评价</h2>
+                    </span>
+                </header>
+                <div class="EPB-EvaluationOfUrbanizationArea-form form">                    
+                    <div class="form-group">
+                        <label class="labels" for="chengshiyujianzhizhenzongmianji-category">城市与建制镇总面积(单位:平方公里)</label>
+                        <input class="form-input" type="number" step="10" name="chengshiyujianzhizhenzongmianji" id="chengshiyujianzhizhenzongmianji-category">
+                    </div>
+                </div>
+                <header>
+                    <span>城市水环境评价</span>
+                </header>
+                <div class="EPB-EvaluationOfUrbanizationArea-form form">
+                    <div class="form-group">
+                        <label class="labels" for="heichoushuitishicechangdu-category">黑臭水体实测长度(米)</label>
+                        <input class="form-input" type="number" name="heichoushuitishicechangdu" id="heichoushuitishicechangdu-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="zhongduheichoushuitichangdu-category">重度黑臭水体长度(米)</label>
+                        <input class="form-input" type="number" name="zhongduheichoushuitichangdu" id="zhongduheichoushuitichangdu-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="chengshishuihuanjingpingjiaquyuquyu-category">[优化开发区域/重点开发区域]</label>
+                        <div class="toggle-input">
+                            <input class="form-input" type="checkbox" name="chengshishuihuanjingpingjiaquyuquyu" id="chengshishuihuanjingpingjiaquyuquyu-category">
+                            <label class="labels" for="chengshishuihuanjingpingjiaquyuquyu-category"></label>
+                        </div>
+                    </div>
+                </div>
+                <header>
+                    <span>城市空气环境质量评价</span>
+                </header>
+                <div class="EPB-EvaluationOfUrbanizationArea-form form">
+                    <div class="form-group">
+                        <label class="labels" for="pm2d5nianchaobiaotianshu-category">PM2.5年超标天数</label>
+                        <input class="form-input" type="number" name="pm2d5nianchaobiaotianshu" id="pm2d5nianchaobiaotianshu-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="hexinchengshizhuchengqu-category">核心城市主城区[否/是]</label>
+                        <div class="toggle-input">
+                            <input class="form-input" type="checkbox" name="hexinchengshizhuchengqu" id="hexinchengshizhuchengqu-category">
+                            <label class="labels" for="hexinchengshizhuchengqu-category"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="list-group" class="header2Title">
-                <i class="fa fa-tag fa-2x"></i>
-                <span>环境评价 评价结果</span>
-                <span class="EvaluationOfEnvironmentResult"></span>
-            </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfEnvironmentDateYear" placeholder="查询年份" class="EvaluationOfEnvironmentDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfEnvironment">确定</div>
-            </div>
-        </div>
-        <div class="EvaluationOfEcological">
-            <header class="header2Title">
-                <h3>生态评价</h3>
-            </header>
-            <div class="EvaluationOfEcological-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EvaluationOfEcologicalResult"></span>
+            <div class="EPB-EmissionIntensityOfPollutants">
+                <header style="margin-bottom:5px;">
+                    <span>
+                        <h2>污染物排放强度变化</h2>
+                    </span>
+                </header>
+                <div class="EPB-EmissionIntensityOfPollutants-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnian-category">基准年</label>
+                        <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianian-category">评价年</label>
+                        <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianGDP-category">基准年GDP(单位:亿元)</label>
+                        <input class="form-input" type="number" name="jizhunnianGDP" id="jizhunnianGDP-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianGDP-category">评价年GDP(单位:亿元)</label>
+                        <input class="form-input" type="number" name="pingjianianGDP" id="pingjianianGDP-category">
+                    </div>
                 </div>
             </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfEcologicalDateYear" placeholder="查询年份" class="EvaluationOfEcologicalDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfEcological">确定</div>
-            </div>
-        </div>
-    </div>
-    <div class="eva2">
-        <header class="headerTitle">
-            <h2>专项评价</h2>
-        </header>
-        <div class="EvaluationOfUrbanizationArea">
-            <header class="header2Title">
-                <h3>城市化地区评价</h3>
-            </header>
-            <div class="EvaluationOfUrbanizationArea-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EvaluationOfUrbanizationAreaResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfUrbanizationAreaDateYear" placeholder="查询年份" class="EvaluationOfUrbanizationAreaDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfUrbanizationArea">确定</div>
-            </div>
-        </div>
-        <div class="EvaluationOfKeyEcologicalFunctionArea">
-            <header class="header2Title">
-                <h3>重点生态功能区评价</h3>
-            </header>
-            <div class="EvaluationOfKeyEcologicalFunctionArea-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EvaluationOfKeyEcologicalFunctionAreaResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="EvaluationOfKeyEcologicalFunctionAreaDateYear" placeholder="查询年份" class="EvaluationOfKeyEcologicalFunctionAreaDateYear">
-                <div class="single-query-btn" data-value="EvaluationOfKeyEcologicalFunctionArea">确定</div>
-            </div>
-        </div>
-    </div>
-    <div class="eva3">
-        <header class="headerTitle">
-            <h2>过程评价</h2>
-        </header>
-        <div class="UtilizationEfficiencyOfLandResources">
-            <header class="header2Title">
-                <h3>土地资源利用效率变化</h3>
-            </header>
-            <div class="UtilizationEfficiencyOfLandResources-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="UtilizationEfficiencyOfLandResourcesResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="UtilizationEfficiencyOfLandResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfLandResourcesDateYear">
-                <div class="single-query-btn" data-value="UtilizationEfficiencyOfLandResources">确定</div>
-            </div>
-        </div>
-        <div class="UtilizationEfficiencyOfWarterResources">
-            <header class="header2Title">
-                <h3>水资源利用效率变化</h3>
-            </header>
-            <div class="UtilizationEfficiencyOfWarterResources-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="UtilizationEfficiencyOfWarterResourcesResult"></span>
-                </div>
-            </div>
-            <div class="single-query">
-                <input type="number" name="UtilizationEfficiencyOfWarterResourcesDateYear" placeholder="查询年份" class="UtilizationEfficiencyOfWarterResourcesDateYear">
-                <div class="single-query-btn" data-value="UtilizationEfficiencyOfWarterResources">确定</div>
-            </div>
-        </div>
-        <div class="EmissionIntensityOfPollutants">
-            <header class="header2Title">
-                <h3>污染物排放强度变化</h3>
-            </header>
-            <div class="EmissionIntensityOfPollutants-Water-o">
+            <div class="EPB-EmissionIntensityOfPollutants-Water-o">
                 <header>
                     <span>水污染物(化学需氧量)排放强度变化</span>
                 </header>
-                <div class="EmissionIntensityOfPollutants-Water-o-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EmissionIntensityOfPollutantsWaterOResult"></span>
+                <div class="EPB-EmissionIntensityOfPollutants-Water-o-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianxingzhengquyuneihuaxuexuyangliang-category">基准年行政区域内化学需氧量(单位:吨)</label>
+                        <input class="form-input" type="number" name="jizhunnianxingzhengquyuneihuaxuexuyangliang" id="jizhunnianxingzhengquyuneihuaxuexuyangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneihuaxuexuyangliang-category">评价年行政区域内化学需氧量(单位:吨)</label>
+                        <input class="form-input" type="number" name="pingjianianxingzhengquyuneihuaxuexuyangliang" id="pingjianianxingzhengquyuneihuaxuexuyangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="quanguonianjunhuaxuexuyangliangpaifangqiangduzengsushuiping-category">全国年均化学需氧量排放强度增速平均水平(格式:小数)</label>
+                        <input class="form-input" type="number" name="quanguonianjunhuaxuexuyangliangpaifangqiangduzengsushuiping" id="quanguonianjunhuaxuexuyangliangpaifangqiangduzengsushuiping-category" value="-0.1085" readonly="readonly">
                     </div>
                 </div>
             </div>
@@ -179,10 +529,18 @@
                 <header>
                     <span>水污染物(氨氮)排放强度变化</span>
                 </header>
-                <div class="EmissionIntensityOfPollutants-Water-n-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EmissionIntensityOfPollutantsWaterNResult"></span>
+                <div class="EPB-EmissionIntensityOfPollutants-Water-n-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianxingzhengquneiandanpaifangliang-category">基准年行政区域内氨氮排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="jizhunnianxingzhengquneiandanpaifangliang" id="jizhunnianxingzhengquneiandanpaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneiandanpaifangliang-category">评价年行政区域内氨氮排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="pingjianianxingzhengquyuneiandanpaifangliang" id="pingjianianxingzhengquyuneiandanpaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="quanguonianjunandanpaifangqiangduzengsupingjunshuiping-category">全国年均氨氮排放强度增速平均水平(格式:小数)</label>
+                        <input class="form-input" type="number" name="quanguonianjunandanpaifangqiangduzengsupingjunshuiping" id="quanguonianjunandanpaifangqiangduzengsupingjunshuiping-category" value="-0.1102" readonly="readonly"
                     </div>
                 </div>
             </div>
@@ -190,10 +548,18 @@
                 <header>
                     <span>大气污染物污染物(二氧化硫)排放强度变化</span>
                 </header>
-                <div class="EmissionIntensityOfPollutants-Air-so2-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EmissionIntensityOfPollutantsAirSO2Result"></span>
+                <div class="EPB-EmissionIntensityOfPollutants-Air-so2-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianxingzhengquyuneieryanghualiupaifangliang-category">基准年行政区域内二氧化硫排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="jizhunnianxingzhengquyuneieryanghualiupaifangliang" id="jizhunnianxingzhengquyuneieryanghualiupaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneieryanghualiupaifangliang-category">评价年行政区域内二氧化硫排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="pingjianianxingzhengquyuneieryanghualiupaifangliang" id="pingjianianxingzhengquyuneieryanghualiupaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="quanguonianjuneryanghualiupaifangqiangduzengsupingjunshuiping-category">全国年均二氧化硫排放强度增速平均水平(格式:小数)</label>
+                        <input class="form-input" type="number" name="quanguonianjuneryanghualiupaifangqiangduzengsupingjunshuiping" id="quanguonianjuneryanghualiupaifangqiangduzengsupingjunshuiping-category" value="-0.1216" readonly="readonly">
                     </div>
                 </div>
             </div>
@@ -201,69 +567,157 @@
                 <header>
                     <span>大气污染物污染物(氮氧化物)排放强度变化</span>
                 </header>
-                <div class="EmissionIntensityOfPollutants-Air-no-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EmissionIntensityOfPollutantsAirNOResult"></span>
+                <div class="EPB-EmissionIntensityOfPollutants-Air-no-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianxingzhengquyuneidanyanghuawupaifangliang-category">基准年行政区域内氮氧化物排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="jizhunnianxingzhengquyuneidanyanghuawupaifangliang" id="jizhunnianxingzhengquyuneidanyanghuawupaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneidanyanghuawupaifangliang-category">评价年行政区域内氮氧化物排放量(单位:吨)</label>
+                        <input class="form-input" type="number" name="pingjianianxingzhengquyuneidanyanghuawupaifangliang" id="pingjianianxingzhengquyuneidanyanghuawupaifangliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels input-active" for="quanguonianjundanyanghuawupaifangqiangduzengsupingjunshuiping-category">全国年均氮氧化物排放强度增速平均水平(格式:小数)</label>
+                        <input class="form-input" type="number" name="quanguonianjundanyanghuawupaifangqiangduzengsupingjunshuiping" id="quanguonianjundanyanghuawupaifangqiangduzengsupingjunshuiping-category" value="-0.1401" readonly="readonly">
                     </div>
                 </div>
             </div>
-            <div class="single-query">
-                <input type="number" name="EmissionIntensityOfPollutantsDateYear" placeholder="查询年份" class="EmissionIntensityOfPollutantsDateYear">
-                <div class="single-query-btn" data-value="EmissionIntensityOfPollutants">确定</div>
-            </div>
         </div>
-        <div class="EcologicalQuality">
-            <header class="header2Title">
-                <h3>生态质量评价</h3>
-            </header>
-            <div class="EcologicalQualityLincao">
+        <div class="FB-form">
+                <div class="FB-EvaluationOfEcological">
+                    <header>
+                        <span>生态评价</span>
+                    </header>
+                    <div class="FB-EvaluationOfEcological-form form">
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangshuituliushimianji-category">中度以上水土流失面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" name="zhongduyishangshuituliushimianji" id="zhongduyishangshuituliushimianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangtudishahuamianji-category">中度以上土地沙化面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" name="zhongduyishangtudishahuamianji" id="zhongduyishangtudishahuamianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangyanzihuamianji-category">中度以上盐渍化面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" name="zhongduyishangyanzihuamianji" id="zhongduyishangyanzihuamianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="zhongduyishangshimohuamianji-category">中度以上石漠化面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" name="zhongduyishangshimohuamianji" id="zhongduyishangshimohuamianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="pingjiaquyutudimianji-category">评价区域土地面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" name="pingjiaquyutudimianji" id="pingjiaquyutudimianji-category">
+                        </div>
+                    </div>
+                </div>
+                <div class="FB-EvaluationOfKeyEcologicalFunctionArea">
+                    <header>
+                        <span>重点生态功能区评价</span>
+                    </header>
+                    <div class="FB-EvaluationOfKeyEcologicalFunctionArea-form form">
+                        <div class="form-group">
+                            <label class="labels" for="shuitulishimianji-category">强烈及以上水土流失面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" step="0.1" name="shuitulishimianji" id="shuitulishimianji-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="xingzhengquyumianji-category">行政区域面积(单位:平方公里)</label>
+                            <input class="form-input" type="number" step="0.1" name="xingzhengquyumianji" id="xingzhengquyumianji-category">
+                        </div>
+                    </div>
+                </div>
+                <div class="FB-EcologicalQuality">
+                    <header>
+                        <span>林草覆盖率变化</span>
+                    </header>
+                    <div class="FB-EcologicalQuality-form form">
+                        <div class="form-group">
+                            <label class="labels" for="jizhunnian-category">基准年</label>
+                            <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="pingjianian-category">评价年</label>
+                            <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="jizhunnianingzhengquyuneilincaofugailv-category">基准年行政区域内林草覆盖率(格式:小数)</label>
+                            <input class="form-input" type="number" name="jizhunnianingzhengquyuneilincaofugailv" id="jizhunnianingzhengquyuneilincaofugailv-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels" for="pingjianianxingzhengquyuneilincaofugailv-category">评价年林草覆盖率(格式:小数)</label>
+                            <input class="form-input" type="number" name="pingjianianxingzhengquyuneilincaofugailv" id="pingjianianxingzhengquyuneilincaofugailv-category">
+                        </div>
+                        <div class="form-group">
+                            <label class="labels input-active" for="quanguonianjunlincaofugailvzengsupingjunshuiping-category">全国年均林草覆盖率变增速平均水平(格式:小数)</label>
+                            <input class="form-input" type="number" name="quanguonianjunlincaofugailvzengsupingjunshuiping" id="quanguonianjunlincaofugailvzengsupingjunshuiping-category" value="-0.0164" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="WA-form">
+            <div class="WA-EvaluationOfWarterResources">
                 <header>
-                    <span>林草覆盖率变化</span>
+                    <span>水资源评价</span>
                 </header>
-                <div class="EcologicalQualityLincao-list a-list">
-                    <div class="list-group">
-                        <i class="fa fa-tag fa-2x"></i>
-                        <span class="EcologicalQualityLincaoResult"></span>
+                <form class="WA-EvaluationOfWarterResources-form form">
+                    <div class="form-group">
+                        <label class="labels" for="yongshuiliang-category">用水量(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="yongshuiliang" id="yongshuiliang-category">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="labels" for="dixiashuigongshuizongliang-category">地下水供水总量(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="dixiashuigongshuizongliang" id="dixiashuigongshuizongliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="yongshuiliangkongzhizhibiao-category">用水量控制指标(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="yongshuiliangkongzhizhibiao" id="yongshuiliangkongzhizhibiao-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="dixiashuigongshuizhibiao-category">地下水供水指标(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="dixiashuigongshuizhibiao" id="dixiashuigongshuizhibiao-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="dixiashuishifouchaocai-category">地下水是否超采[否/是]</label>
+                        <div class="toggle-input">
+                            <input class="form-input" type="checkbox" name="dixiashuishifouchaocai" id="dixiashuishifouchaocai-category">
+                            <label class="labels" for="dixiashuishifouchaocai-category"></label>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="single-query">
-                <input type="number" name="EcologicalQualityDateYear" placeholder="查询年份" class="EcologicalQualityDateYear">
-                <div class="single-query-btn" data-value="EcologicalQuality">确定</div>
-            </div>
-        </div>
-    </div>
-    <div class="eva4">
-        <header class="headerTitle">
-            <h2>类别划分</h2>
-        </header>
-        <div class="categoryProcessEvaluation">
-            <header class="header2Title">
-                <h3>资源利用效率变化</h3>
-            </header>
-            <div class="UtilizationEfficiencyOfResourcesCategory-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="UtilizationEfficiencyOfResourcesCategoryResult"></span>
-                </div>
-            </div>
-            <header class="header2Title">
-                <h3>污染物排放强度变化</h3>
-            </header>
-            <div class="EmissionIntensityOfPollutantsCategory-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EmissionIntensityOfPollutantsCategoryResult"></span>
-                </div>
-            </div>
-            <header class="header2Title">
-                <h3>生态质量变化</h3>
-            </header>
-            <div class="EcologicalQualityCategory-list a-list">
-                <div class="list-group">
-                    <i class="fa fa-tag fa-2x"></i>
-                    <span class="EcologicalQualityCategoryResult"></span>
+            <div class="WA-UtilizationEfficiencyOfWarterResources">
+                <header>
+                    <span>水资源利用效率变化</span>
+                </header>
+                <div class="WA-UtilizationEfficiencyOfWarterResources-form form">
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnian-category">基准年</label>
+                        <input class="form-input" type="number" min="1949" name="jizhunnian" id="jizhunnian-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianian-category">评价年</label>
+                        <input class="form-input" type="number" min="1949" name="pingjianian" id="pingjianian-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianGDP-category">基准年GDP(单位:亿元)</label>
+                        <input class="form-input" type="number" name="jizhunnianGDP" id="jizhunnianGDP-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianGDP-category">评价年GDP(单位:亿元)</label>
+                        <input class="form-input" type="number" name="pingjianianGDP" id="pingjianianGDP-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="jizhunnianxingzhengquyuneiyongshuiliang-category">基准年行政区域内用水量(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="jizhunnianxingzhengquyuneiyongshuiliang" id="jizhunnianxingzhengquyuneiyongshuiliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels" for="pingjianianxingzhengquyuneiyongshuiliang-category">评价年行政区域内用水量(单位:亿m<sup>3</sup>)</label>
+                        <input class="form-input" type="number" name="pingjianianxingzhengquyuneiyongshuiliang" id="pingjianianxingzhengquyuneiyongshuiliang-category">
+                    </div>
+                    <div class="form-group">
+                        <label class="labels input-active" for="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-category">全国年均水资源利用效率增速平均水平(格式:小数)</label>
+                        <input class="form-input" type="number" name="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping" id="quanguonianjunshuiziyuanliyongxiaolvzengsupingjunshuiping-category" value="0.1281" readonly="readonly">
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,8 +730,14 @@
     <a href="/api/logout" class="logout-btn">
         <div>离开</div>
     </a>
-    <a class="query-btn"><div>确定</div></a>
-    <a href="#/DRC/help" class="help"><div><i class="fa fa-question-circle-o animated pulse infinite"></i>查看帮助</div></a>
+    <a class="query-btn">
+        <div>查看评价结果</div>
+    </a>
+    <a href="#/DRC/detail" class="detail">
+        <div>
+            <!-- <i class="fa fa-question-circle-o animated pulse infinite"></i> -->
+            查看详细输入</div>
+    </a>
 </header>
 <div class="tips">
     <div class="tips-body">

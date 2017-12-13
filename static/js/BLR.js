@@ -12,11 +12,11 @@ function EvaluationOfLandResources(data){
     var t = D.jiansheyongdimianji  / D.xingzhengquyumianji
     var res
     if(t > 0.15){
-        res = "土地资源压力大"
+        res = '土地开发强度: ' + t + " , 土地资源压力大"
     }else if(t <= 0.15 && t >= 0.1){
-        res = "土地资源压力中等"
+        res = '土地开发强度: ' + t + " , 土地资源压力中等"
     }else{
-        res = "土地资源压力小"
+        res = '土地开发强度: ' + t + " , 土地资源压力小"
     }
     return res
 }

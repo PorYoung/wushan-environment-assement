@@ -366,7 +366,7 @@ input:focus{
     .input-active{
         /* transform:translateY(300%); */
         /* transform: translateY(-10px) translateZ(2em); */
-        font-size:14px !important;
+        font-size:15px !important;
     }
 }
 
