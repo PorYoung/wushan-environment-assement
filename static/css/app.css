@@ -19,7 +19,7 @@ html,body{
 
 .header{
     padding: 6px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     overflow: hidden;
     text-align: center;
     position: absolute;

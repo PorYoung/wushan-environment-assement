@@ -40,7 +40,7 @@
         var updateUsername = document.querySelector('.user-current').dataset.value
         var updatePassword = document.querySelector('.password input[name="updatePassword"]').value,
             ManagerPassword = document.querySelector('.password input[name="password"]').value
-        if(!username || !username.match(/(DRC)|(BLR)|(FB)|(WA)|(EPB)|(Manager)/)){
+        if(!updateUsername || !updateUsername.match(/(DRC)|(BLR)|(FB)|(WA)|(EPB)|(Manager)/)){
             var closeTips = showTips("请选择要更改密码的单位")
             setTimeout(function(){
                 closeTips()
@@ -63,7 +63,7 @@
         }
         window._ajax({
             data:{
-                updateUsername: username,
+                updateUsername: updateUsername,
                 updatePassword: updatePassword,
                 password: ManagerPassword,
                 username: 'Manager'
@@ -72,7 +72,7 @@
             url: '/api/update',
             success: function(res){
                 if(!!res && res == '1'){
-                    var closeTips = showTips('更改成功')
+                    var closeTips = showTips('更改成功',true)
                     setTimeout(function(){
                         closeTips()
                     },3000)
@@ -108,11 +108,11 @@
             url: '/api/initial',
             success: function(res){
                 if(!!res && res == '1'){
-                    var closeTips = showTips('初始化成功,即将退出')
+                    var closeTips = showTips('初始化成功,即将退出',true)
                     setTimeout(function(){
                         closeTips()
                         window.location.href = '/api/logout'
-                    },1000)
+                    },3000)
                 }else{
                     var closeTips = showTips('初始化失败，请重试')
                     setTimeout(function(){

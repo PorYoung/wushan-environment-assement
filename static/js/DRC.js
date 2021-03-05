@@ -23,7 +23,9 @@
             EvaluationOfWarterResources:{},
             UtilizationEfficiencyOfWarterResources:{}
         },
-        yujingdengji:{}
+        yujingdengji:{
+            yujingdengjiResult:null
+        }
     }
 
     var dateYear = document.querySelector('.dateYear'),
@@ -128,7 +130,7 @@ function expandObject(obj) {
             if (typeof obj[key] != "function") {
                 var item = document.querySelector('.' + key)
                 if (!!item) {
-                    console.log(obj[key])
+                    // console.log(obj[key])
                     if(obj[key].toString().indexOf(',') != -1){
                         var t = obj[key].toString().split(','),
                             html = '<span>'+t[0]+'</span><span style="margin-left:10px;">'+t[1]+'</span>'
@@ -217,7 +219,9 @@ function queryStatistics(sid,callback) {
                                 break
                             }
                             case 'yujingdengji':{
-                                config.data.yujingdengji = {}
+                                config.data.yujingdengji = {
+                                    yujingdengjiResult:null
+                                }
                             }
                         }
                     }
@@ -508,7 +512,8 @@ function categoryProcessEvaluation() {
                     document.querySelector('.yujingdengji').style.backgroundColor = "rgb(0, 100, 0)"
                 }
             }else{
-                obj.yujingdengji.yujingdengjiResult = '暂无数据'                
+                tmp.yujingdengjiResult = '暂无数据'  
+                document.querySelector('.yujingdengji').style.backgroundColor = "initial"              
             }
         }else if(obj.ziyuansunhaozhishuResult.indexOf('趋缓型') != -1){
             var chaozai = config.data.chaozaileixingEvaluation.chaozaileixingEvaluationResult
@@ -524,14 +529,18 @@ function categoryProcessEvaluation() {
                     document.querySelector('.yujingdengji').style.backgroundColor = "rgb(0, 100, 0)"
                 }
             }else{
-                config.data.yujingdengji.yujingdengjiResult = '暂无数据'
+                tmp.yujingdengjiResult = '暂无数据'
+                document.querySelector('.yujingdengji').style.backgroundColor = "initial"
             }
         }
     }else{
         tmp.yujingdengjiResult = '暂无数据'
         document.querySelector('.yujingdengji').style.backgroundColor = "transparent"             
     }
-    Object.assign(config.data, tmp)    
+    if(!config.data.hasOwnProperty('yujingdengji')){
+        config.data.yujingdengji = {}
+    }
+    Object.assign(config.data.yujingdengji, tmp)    
     expandObject(tmp)
 }
 
@@ -666,4 +675,11 @@ qRouter.on('/:user/:sid', function (req) {
     detailPanel.style.display = 'none'
     var sid = req.params.sid
     queryStatistics(sid)
+})
+
+qRouter.on('/'+config.user+'/help',function(){
+    var closeTips = showTips('管理员尚未提供任何信息，如有任何疑问请联系系统管理员！')
+    setTimeout(function(){
+        closeTips()
+    }, 3000)
 })

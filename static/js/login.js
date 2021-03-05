@@ -3,11 +3,16 @@
     var img = new Image()
     img.src = "/static/image/bg.png"
     img.onload = function(){
-        document.querySelector('.background').style.backgroundImage = 'url("/static/image/bg.png")'
-        document.querySelector('.background').classList.remove('background-prev')
-        document.querySelector('#preloadImage').style.display = 'none'
-        document.querySelector('#preloadImage').classList.removeClass('animated fadeIn')
-        timer = bgAnimation()
+        _addLoadEvent(function(){
+            document.querySelector('.background').style.backgroundImage = 'url("/static/image/bg.png")'
+            document.querySelector('.background').style.zIndex = '-1'
+            document.querySelector('.background').style.display = 'initial'
+            document.querySelector('.background').innerHTML = ''
+            document.querySelector('.background').classList.remove('background-prev')
+            document.querySelector('#preloadImage').style.display = 'none'
+            document.querySelector('#preloadImage').classList.removeClass('animated fadeIn')
+            timer = bgAnimation()
+        })
     }
     /* window._ajax({
         url:'/static/image/bg.png',
@@ -21,10 +26,12 @@
     var imgBgMin = new Image()
     imgBgMin.src = "/static/image/bg-min.png"
     imgBgMin.onload = function(){
-        // document.querySelector('.background').style.backgroundImage = 'url("/static/image/bg-min.png")'
+        _addLoadEvent(function(){
+	// document.querySelector('.background').style.backgroundImage = 'url("/static/image/bg-min.png")'
         document.querySelector('#preloadImage').src = "/static/image/bg-min.png"
         document.querySelector('#preloadImage').classList.addClass('animated fadeIn')
         // document.querySelector('#preloadImage').style.display = 'block'
+    	})
     }
 
     _addLoadEvent(function(){

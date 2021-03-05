@@ -1,4 +1,4 @@
-const opn = require('opn')
+//const opn = require('opn')
 const express = require('express')
 /**************服务端配置开始****************/
 
@@ -15,4 +15,4 @@ app.use('/static', express.static('./static'))
 
 const uri = 'http://localhost:' + 3000
 
-opn(uri)
+//opn(uri)

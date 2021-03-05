@@ -177,7 +177,8 @@ function _addLoadEvent(func) {
     }
 }
 
-function showTips(str) {
+function showTips(str,flag) {
+    flag = flag || false
     document.querySelector('.tips-text').innerHTML = str || '请检查您的输入'
     document.querySelector('.tips').style.zIndex = '999'
     document.querySelector('.tips').style.opacity = '1'
@@ -187,10 +188,12 @@ function showTips(str) {
         document.body.classList.removeClass('animated shake')
         document.querySelector('.tips').classList.removeClass('animated flipInX')
         document.querySelector('.tips').classList.addClass('animated flipOutY')
-        setTimeout(function () {
+        if(!!flag) document.querySelector('.tips').style.backgroundColor = 'rgba(30,235,30,.7)'
+	setTimeout(function () {
             document.querySelector('.tips').style.opacity = '0'
             document.querySelector('.tips').style.zIndex = '-1'
             document.querySelector('.tips').classList.removeClass('animated flipOutY')
+	    if(!!flag) document.querySelector('.tips').style.backgroundColor = ''
         }, 1000)
     }
 }

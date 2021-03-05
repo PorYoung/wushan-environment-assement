@@ -134,3 +134,10 @@ qRouter.on('/'+config.user+'/submit',function(){
         }, 3000)
     }
 })
+
+qRouter.on('/'+config.user+'/help',function(){
+    var closeTips = showTips('管理员尚未提供任何信息，如有任何疑问请联系系统管理员！')
+    setTimeout(function(){
+        closeTips()
+    }, 3000)
+})

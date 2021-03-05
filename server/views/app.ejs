@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/css/login.css">
+	<link rel="stylesheet" href="/static/css/global.css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="/static/js/lib.js"></script>
@@ -94,8 +95,21 @@
         <div class="title">
             巫山县资源环境承载能力监测预警评价软件系统
         </div>
+        <% if(isNotNew===false){ %>
+        <div class="background background-prev" style="z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:26px;">
+            <div style="margin-bottom:150px;">首次加载，请耐心等待一段时间...</div>
+            <div class="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+        <% }else{ %>
         <div class="background background-prev">
         </div>
+        <% } %>
         <div class="wrap flex">
             <div class="username flex">
                 <header><i class="fa fa-user icon animated pulse infinite" aria-hidden="true"></i><span>选择单位</span></header>

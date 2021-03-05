@@ -1,17 +1,27 @@
 import fs from 'fs'
-import path from 'path'
 import crypto from 'crypto'
 
 export default class{
     static async fn_login_index(req, res, next) {
-        if(!!req.session.username){
+        if(!!req.session.isNotNew){
+            if(!!req.session.username){
+                return res.render('app',{
+                    username: req.session.username,
+                    isNotNew: true
+                })
+            }else{
+                return res.render('app',{
+                    username: null,
+                    isNotNew: true
+                })
+            }
+        }else{
+            req.session.isNotNew = true
             return res.render('app',{
-                username: req.session.username
+                username: null,
+                isNotNew: false
             })
         }
-        return res.render('app',{
-            username: null
-        })
     }
     static async fn_login_handle(req, res, next) {
         let {username, password} = req.body
@@ -42,10 +52,10 @@ export default class{
             userinfo.password = crypto.createHash("sha1").update(userinfo.password).digest("hex")
             let info = await db.user.findOne({username: 'Manager'})
             if(!!info && info.password === userinfo.password){
-                info = await db.user.findOne({username: info.updateUsername})
-                if(!!info && userInfo.updatePassword){
-                    userinfo.updatePassword = crypto.createHash("sha1").update(userinfo.updatePassword).digest("hex")
-                    await db.user.findOneAndUpdate({username: userinfo.updateUsername},{password: userinfo.updatePassword})
+                info = await db.user.findOne({username: userinfo.updateUsername})
+                if(!!info && userinfo.updatePassword){
+                    info.updatePassword = crypto.createHash("sha1").update(userinfo.updatePassword).digest("hex")
+                    await db.user.findOneAndUpdate({username: userinfo.updateUsername},{password: info.updatePassword})
                     return res.send('1')
                 }
             }
@@ -78,7 +88,7 @@ export default class{
 
     static async user_page_load(req, res, next) {
         let username = req.session.username
-        fs.createReadStream(path.resolve(__dirname + '../../../views/'+ username +'.html')).pipe(res)
+        fs.createReadStream( 'server/views/'+ username +'.html').pipe(res)
     }
 
     static async statistics_submit(req, res, next){
